@@ -1,7 +1,7 @@
 # FAST — Instant Dating (India)
 ## Product Requirements Document
 
-**Version:** 1.0
+**Version:** 1.1
 **Last Updated:** January 2026
 **Product Owner:** FAST Product Team
 **Status:** Draft
@@ -232,9 +232,19 @@ Users are matched based on **shared activities**, not explicit relationship inte
 2. They are within your distance settings
 3. Their availability is visible (so you can see if times might work)
 
+#### Session-Based Discovery Setup
+Before browsing profiles, users set their **intent for this session**:
+1. **Select activity for now:** Choose what they want to do right now (e.g., "Drinks," "Coffee")
+2. **Set availability:** Pick a time slot for today (e.g., "7:00 PM – 9:00 PM")
+
+This session filter narrows discovery to profiles that match the selected activity. Users can change these settings anytime from the discovery screen header.
+
+> **Example:** Priya opens the app at 5:30 PM, sets availability for 7–9 PM today, and selects "Drinks." She now sees profiles of people who also selected "Drinks" as an activity.
+
 #### Availability-Led Discovery
 - Users see other profiles' **time slots** based on their distance settings
-- By default, all profiles within distance are shown with their availability visible
+- **Default behavior:** All profiles within distance are shown with their availability visible, **regardless of time slot overlap**
+- Users can match with someone even if time slots don't perfectly align (they can negotiate timing in chat)
 - **Optional filter:** "Show only people available in my time slot" narrows results to overlapping availability
 - This filter is accessible from the discovery screen header
 
@@ -248,10 +258,12 @@ Users are matched based on **shared activities**, not explicit relationship inte
 - **Shared activities badge:** Prominently shows which activities you both selected
 
 #### Interaction Model
-- **Like button** and **Unlike button** (thumbs/tick/cross style)
+- **Primary interaction:** Swipe gestures (swipe right to like, swipe left to unlike)
+- **Alternative:** Like/Unlike buttons (thumbs/tick/cross style) for users who prefer tapping
 - **Unlike animation:** Card flies left (trash-like motion)
 - **Like animation:** Card flies right with golden glow accent
-- After like: Show popup *"Send your intro to {Name}"* for 5 seconds
+- **Auto-sent introduction:** When user likes a profile, their auto-generated intro is automatically sent
+- After like: Show popup *"Your intro has been sent to {Name}"* for 5 seconds
 - **Match popup:** Display for 1 out of every 3 likes
 - Do NOT auto-navigate to chat after like
 
@@ -268,17 +280,43 @@ Users are matched based on **shared activities**, not explicit relationship inte
 #### Header
 - Display: **Name, Age, Shared Activity, Availability slot**
 - Profile photo tap → Opens full profile
-- Shared activity shown as badge (e.g., "☕ Coffee")
+- Shared activity shown as badge (e.g., "🍻 Drinks")
 
-#### Quick Actions
-- "Send introduction" as a **chat quick-action chip**
-- Sends the **auto-generated intro** from Bio Builder
-- Mix with other tappable quick message options
-- **Activity-specific starters:** "Want to grab coffee at [time]?" based on shared activity
+#### Auto-Received Introduction
+- When opening a chat, the user sees the **other person's auto-generated intro** already displayed
+- This creates immediate context without requiring manual first messages
+
+#### Quick Reply System (Minimal Typing Flow)
+The chat is designed for **tap-to-communicate** in early stages. Manual typing only begins during venue discussion.
+
+**Quick Reply Categories:**
+
+| Category | Example Quick Replies |
+|----------|----------------------|
+| **Meeting Intent** | "Are you up for meeting today?" / "Want to meet this week?" |
+| **Availability Confirmation** | "Yes, that time works!" / "Can we do a bit later?" |
+| **Venue Discussion Starters** | "Yes, but where do you want to meet?" / "Any place you prefer?" |
+| **Activity-Specific** | "Want to grab drinks at [time]?" / "Coffee sounds great!" |
+| **Send Introduction** | Sends the auto-generated intro from Bio Builder |
+
+**Design principle:** Users communicate by selecting pre-built options until they need to discuss specific venues—then the keyboard activates for manual typing.
+
+#### Venue Discussion & Plan Confirmation
+Once both users agree to meet:
+1. **Manual typing enabled** for suggesting specific venues (e.g., "How about Toit in Indiranagar?")
+2. Users exchange venue suggestions via free-text chat
+3. **Plan confirmation:** Once venue and time are agreed, either user can tap "Confirm Plan" to lock in the meeting details
+4. Confirmed plans show as a **pinned card** at the top of chat with venue, time, and activity
 
 #### Quick Alignment (Anti-Catfishing)
-- **Prominent call buttons** for voice and video call
-- If both users have selected a call preference, show banner: "You both prefer a quick call before meeting—schedule one?"
+**Purpose:** Let users verify the other person's vibe and authenticity before meeting in person.
+
+- **Call request flow:**
+  1. User taps "Request Call" button (voice or video)
+  2. Other user receives call request notification in chat
+  3. Other user taps "Accept" or "Decline"
+  4. If accepted, call initiates immediately
+- If both users have selected a call preference in their profile, show banner: "You both prefer a quick call before meeting—schedule one?"
 - Call acts as vibe check before committing to in-person activity
 - On-screen keyboard visible for realism
 
@@ -317,26 +355,38 @@ Users are matched based on **shared activities**, not explicit relationship inte
 |----|-------------|----------|
 | DISC-01 | Generate 100+ fake profiles for prototype | P0 |
 | DISC-02 | Profile cards with 4 photos, tap-to-navigate | P0 |
-| DISC-03 | Like/Unlike buttons (not swipe) | P0 |
-| DISC-04 | Card animations (left for unlike, right+glow for like) | P1 |
-| DISC-05 | "Send intro" popup after like (5 seconds) | P0 |
-| DISC-06 | Match popup for 1 in 3 likes | P0 |
-| DISC-07 | Match based on shared activity interest (core logic) | P0 |
-| DISC-08 | Display shared activities prominently on profile cards | P0 |
-| DISC-09 | Show availability time slots on profiles (based on distance settings) | P0 |
-| DISC-10 | Optional filter: "Show only available in my time slot" | P1 |
-| DISC-11 | Distance-based filtering | P0 |
+| DISC-03 | Swipe gestures (right to like, left to unlike) as primary interaction | P0 |
+| DISC-04 | Like/Unlike buttons as alternative to swiping | P1 |
+| DISC-05 | Card animations (left for unlike, right+glow for like) | P1 |
+| DISC-06 | Auto-send user's intro when they like a profile | P0 |
+| DISC-07 | "Your intro has been sent to {Name}" popup after like (5 seconds) | P0 |
+| DISC-08 | Match popup for 1 in 3 likes | P0 |
+| DISC-09 | Match based on shared activity interest (core logic) | P0 |
+| DISC-10 | Display shared activities prominently on profile cards | P0 |
+| DISC-11 | Show availability time slots on profiles (based on distance settings) | P0 |
+| DISC-12 | Optional filter: "Show only available in my time slot" | P1 |
+| DISC-13 | Distance-based filtering | P0 |
+| DISC-14 | Session-based activity filter (select activity before browsing) | P0 |
+| DISC-15 | Session-based availability setting (set time slot for today) | P0 |
+| DISC-16 | Allow matching with non-overlapping time slots (negotiate in chat) | P0 |
 
 ### 6.4 Matching & Chat
 | ID | Requirement | Priority |
 |----|-------------|----------|
 | CHAT-01 | Match list showing name + shared activity + availability range | P0 |
 | CHAT-02 | Chat header with name, age, shared activity badge, availability | P0 |
-| CHAT-03 | Quick-action chips including "Send introduction" | P0 |
-| CHAT-04 | Activity-specific conversation starters | P1 |
-| CHAT-05 | Voice and video call buttons (Quick Alignment) | P0 |
-| CHAT-06 | Quick Alignment banner when both users prefer a call | P0 |
-| CHAT-07 | On-screen keyboard UI | P2 |
+| CHAT-03 | Auto-display other user's intro when opening chat | P0 |
+| CHAT-04 | Quick reply chips for meeting intent (e.g., "Are you up for meeting today?") | P0 |
+| CHAT-05 | Quick reply chips for availability confirmation | P0 |
+| CHAT-06 | Quick reply chips for venue discussion starters | P0 |
+| CHAT-07 | Activity-specific quick reply options | P1 |
+| CHAT-08 | Manual typing enabled only during venue discussion phase | P0 |
+| CHAT-09 | "Confirm Plan" button to lock in meeting details | P1 |
+| CHAT-10 | Pinned plan card showing confirmed venue, time, and activity | P1 |
+| CHAT-11 | Voice and video call request button (Quick Alignment) | P0 |
+| CHAT-12 | Call request/accept/decline flow | P0 |
+| CHAT-13 | Quick Alignment banner when both users prefer a call | P0 |
+| CHAT-14 | On-screen keyboard UI (activates during venue discussion) | P2 |
 
 ### 6.5 Calendar & Scheduling
 | ID | Requirement | Priority |
@@ -455,11 +505,15 @@ Users are matched based on **shared activities**, not explicit relationship inte
 | Term | Definition |
 |------|------------|
 | Activity-first matching | Core FAST philosophy: users match based on shared activities (not explicit relationship intent), creating natural reasons to meet |
+| Auto-sent introduction | When a user likes a profile, their auto-generated bio is automatically sent to that person |
 | Availability-led discovery | Users see other profiles' time slots based on distance settings; optional filter narrows to overlapping availability only |
 | Bio Builder | Feature that generates user bios from quick questionnaire responses |
+| Plan confirmation | Feature that locks in meeting details (venue, time, activity) as a pinned card in chat |
 | Quick Alignment | Pre-meeting video/voice call to verify the other person's vibe and authenticity (anti-catfishing measure) |
+| Quick reply system | Tap-to-communicate chat interface using pre-built response options; minimizes typing in early conversation |
+| Session-based filtering | Setting activity and availability for the current browsing session before swiping |
 | Shared Activity | The activity both users have selected (e.g., pottery, coffee), displayed prominently as the reason for the match |
-| Journey mapping | Visual breakdown of user's end-to-end experience (steps, thoughts, emotions, pain points, opportunities) |
+| Venue discussion phase | Chat phase where manual typing is enabled for users to suggest and agree on specific meeting locations |
 
 ### 8.2 Out of Scope (v1.0)
 - Payment/subscription features
@@ -475,6 +529,65 @@ Users are matched based on **shared activities**, not explicit relationship inte
 - Implement premium tiers
 - Add group date features
 - Integrate with calendar apps
+
+### 8.4 Sample User Journey
+
+This end-to-end example illustrates how FAST is intended to be used:
+
+---
+
+**User:** Priya (looking to meet someone for drinks tonight)
+
+**5:30 PM — Session Setup**
+1. Priya logs into FAST
+2. She sets her availability: **7:00 PM – 9:00 PM today**
+3. She selects her activity: **"Drinks"**
+
+**5:32 PM — Discovery**
+4. Priya starts swiping through profiles filtered by "Drinks" activity
+5. Each profile shows the person's availability time slot (may or may not overlap with hers)
+6. She swipes left on 10 profiles that don't interest her
+
+**5:35 PM — Finding a Match**
+7. On the 11th profile, she sees **Rahul**—a nice-looking guy whose bio resonates with her
+8. Rahul's availability is **9:00 PM – 11:00 PM** (different from her slot)
+9. Despite the time mismatch, she's interested—she swipes right
+10. Popup appears: *"Your intro has been sent to Rahul"*
+
+**5:36 PM — Chat Begins**
+11. Priya opens the chat with Rahul
+12. She sees Rahul's **auto-generated intro** already displayed (no waiting for first message)
+13. Priya taps a quick reply: **"Are you up for meeting today?"**
+14. Rahul responds with quick reply: **"Yes, but where do you want to meet?"**
+
+**5:38 PM — Venue Discussion (Manual Typing Begins)**
+15. Now that they've agreed to meet, the keyboard activates
+16. Priya types: "How about Toit in Indiranagar?"
+17. Rahul replies: "Perfect, see you at 8:30?"
+18. They negotiate a time that works for both (between their availability windows)
+
+**5:40 PM — Quick Alignment Call**
+19. Priya wants to verify Rahul's vibe before meeting
+20. She taps **"Request Call"** (voice)
+21. Rahul receives the request and taps **"Accept"**
+22. They have a quick 5-minute call
+23. Priya feels confident about the interaction
+
+**5:45 PM — Plan Confirmed**
+24. Priya taps **"Confirm Plan"** in the chat
+25. A pinned card appears: **"Drinks at Toit, Indiranagar — 8:30 PM"**
+
+**8:30 PM — Activity Together**
+26. Priya and Rahul meet for drinks 🍻
+
+---
+
+**Key Observations from This Journey:**
+- Total time from login to confirmed plan: ~15 minutes
+- Manual typing only occurred during venue discussion
+- Time slot mismatch didn't prevent matching—they negotiated in chat
+- Quick Alignment call provided confidence before meeting in person
+- The "activity" (drinks) provided natural context for the meeting
 
 ---
 
