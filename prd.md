@@ -189,7 +189,7 @@ Welcome → Login/Signup → Profile Creation → Activity & Availability Setup 
 - Return to main profile flow after completion
 
 #### Step 3: Bio Builder (No Manual Typing)
-- "Create Bio" opens a **dedicated page** with ~10 quick questions
+- "Create Bio" opens a **dedicated page** with ~22 quick questions
 - Each question presents selectable options (single/multi-select)
 - App **auto-generates** a short intro/bio from selected answers
 
@@ -206,6 +206,18 @@ Welcome → Login/Signup → Profile Creation → Activity & Availability Setup 
 | Ideal date | Coffee / Drinks / Dinner / Walk |
 | Music mood | Indie / Bollywood / Techno / Lo-fi |
 | Communication style | Direct / Playful / Soft / Minimal |
+| Height | Under 5'0" / 5'0"–5'4" / 5'5"–5'8" / 5'9"–6'0" / Over 6'0" |
+| Food preferences | Vegetarian / Non-vegetarian / Vegan / Eggetarian / Jain |
+| Working style | 9-to-5 grinder / Startup hustle / Freelance / Flexible hours / Night owl |
+| Ideal trip | Mountains / Beach / City exploration / Road trip / Staycation |
+| Ideal life | Fast-paced city / Slow countryside / Travel nomad / Suburban balance / Haven't figured it out |
+| Cooking | Love cooking / Survival mode / Ordering expert / Learning / Hate it |
+| Friend circle | Tight-knit few / Large social circle / Mix of both / Mostly solo / Making new friends |
+| Family oriented | Very close to family / Independent but connected / Figuring it out / Not really |
+| Kids | Love kids / Maybe someday / Not for me / Haven't thought about it |
+| Movie preferences | Mainstream blockbusters / Indie films / Documentaries / Foreign cinema / All of the above |
+| Neurodivergent | ADHD / OCD / Anxiety / On the spectrum / Prefer not to say / None |
+| Therapy | Currently in therapy / Have been before / Open to it / Not my thing / Prefer not to say |
 
 #### Step 4: Bill Preference
 - Icon: **₹ (Rupee symbol)**
