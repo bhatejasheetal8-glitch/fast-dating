@@ -90,35 +90,49 @@ Urban India (Tier 1 cities), starting with Bangalore
 
 ### 3.3 User Personas
 
-#### Persona 1: Emotional Gen-Z
+#### Persona 1: Clarity-Seeking Gen-Z
 | Attribute | Details |
 |-----------|---------|
-| **Demographics** | Male, 22, Undergraduate |
-| **Lifestyle** | Reels-heavy, fast decisions, social but selective |
-| **Needs** | Emotional clarity, vibe match, low effort |
-| **Motivation** | Meet someone who "gets it" quickly |
-| **Traits** | Expressive, intuitive, impatient with boring chats |
-| **Frustration** | *"I'm tired of texting for days just to realize we're not even on the same vibe."* |
+| **Demographics** | 20–25 years old, college student or early career |
+| **Lifestyle** | Digital-native, scroll-heavy, values authenticity over polish |
+| **Needs** | Upfront intentions, no games, clear signals |
+| **Motivation** | Skip the guesswork—know what the other person wants before investing time |
+| **Traits** | Direct, values honesty, dislikes vague "let's see where this goes" energy |
+| **Frustration** | *"Just tell me what you're looking for. I hate wasting time decoding mixed signals."* |
+| **Why FAST works** | Activity-first matching removes ambiguity—both people know why they're meeting |
 
-#### Persona 2: Busy Professional
+#### Persona 2: Transparency-First Gen-Z
 | Attribute | Details |
 |-----------|---------|
-| **Demographics** | Male, 28, Graduate / Professional diploma |
-| **Lifestyle** | Gym, work, routines, high standards, time-poor |
-| **Needs** | Efficient filtering, quick planning, confidence in intent |
-| **Motivation** | Dating without losing momentum or time |
-| **Traits** | Structured, decisive, quality-seeking |
-| **Frustration** | *"I don't have energy for endless back-and-forth that never turns into a real plan."* |
+| **Demographics** | 22–26 years old, working professional or postgraduate |
+| **Lifestyle** | Career-focused but socially active, prefers quality interactions over quantity |
+| **Needs** | Real profiles, verified intentions, no catfishing |
+| **Motivation** | Meet genuine people without the performance theater |
+| **Traits** | Skeptical of curated personas, values realness, quick to spot inauthenticity |
+| **Frustration** | *"Everyone's profile is a highlight reel. I want to know who they actually are."* |
+| **Why FAST works** | Quick Alignment calls verify the person; auto-generated bios reduce fake personas |
 
-#### Persona 3: Quiet Introvert
+#### Persona 3: Time-Starved Professional
 | Attribute | Details |
 |-----------|---------|
-| **Demographics** | Male, 30, Graduate |
-| **Lifestyle** | Small circle, thoughtful, prefers calm settings |
-| **Needs** | Low-pressure interactions, structured icebreakers, safety |
-| **Motivation** | Meet someone without social overload |
-| **Traits** | Observant, sincere, anxious about first moves |
-| **Frustration** | *"I freeze when chats turn performative—dating apps feel louder than real life."* |
+| **Demographics** | 26–32 years old, working professional (tech, consulting, finance, etc.) |
+| **Lifestyle** | Long work hours, limited personal time, structured routines |
+| **Needs** | Efficient filtering, fast scheduling, minimal back-and-forth |
+| **Motivation** | Date without sacrificing productivity or mental bandwidth |
+| **Traits** | Decisive, values efficiency, outcome-oriented |
+| **Frustration** | *"I have 2 hours free this week. I can't spend them on small talk that goes nowhere."* |
+| **Why FAST works** | Availability slots + activity matching = meetings happen fast, not conversations |
+
+#### Persona 4: Burned-Out Professional
+| Attribute | Details |
+|-----------|---------|
+| **Demographics** | 28–35 years old, mid-career professional |
+| **Lifestyle** | Mentally drained from work, values low-effort social interactions |
+| **Needs** | Low-pressure meeting formats, no obligation to "perform" |
+| **Motivation** | Meet someone without adding to decision fatigue |
+| **Traits** | Selective with energy, prefers structured interactions, avoids high-stakes situations |
+| **Frustration** | *"Dating apps feel like another job. I don't have the mental energy to be 'on' all the time."* |
+| **Why FAST works** | Quick replies reduce effort; activity-focus removes the "interview" pressure |
 
 ---
 
