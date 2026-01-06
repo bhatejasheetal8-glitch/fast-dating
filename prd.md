@@ -1,10 +1,10 @@
 # FAST — Instant Dating (India)
 ## Product Requirements Document
 
-**Version:** 1.1
+**Version:** 2.0
 **Last Updated:** January 2026
 **Product Owner:** FAST Product Team
-**Status:** Draft
+**Status:** Draft — Extended with Viral Growth & Distribution Strategy
 
 ---
 
@@ -13,10 +13,13 @@
 2. [Problem Statement](#2-problem-statement)
 3. [Target Users & Personas](#3-target-users--personas)
 4. [Product Goals & Success Metrics](#4-product-goals--success-metrics)
-5. [Core Features & User Flows](#5-core-features--user-flows)
-6. [Functional Requirements](#6-functional-requirements)
-7. [Design System & Brand Guidelines](#7-design-system--brand-guidelines)
-8. [Appendix](#8-appendix)
+5. [Viral Growth & Distribution Strategy](#5-viral-growth--distribution-strategy)
+6. [Launch Playbook](#6-launch-playbook)
+7. [Notification Strategy](#7-notification-strategy)
+8. [Core Features & User Flows](#8-core-features--user-flows)
+9. [Functional Requirements](#9-functional-requirements)
+10. [Design System & Brand Guidelines](#10-design-system--brand-guidelines)
+11. [Appendix](#11-appendix)
 
 ---
 
@@ -146,27 +149,294 @@ Urban India (Tier 1 cities), starting with Bangalore
 5. Reduce catfishing through quick alignment (video/voice verification)
 
 ### 4.2 Key Performance Indicators (KPIs)
-| Metric | Description |
-|--------|-------------|
-| Match-to-Activity Conversion | % of matches that result in scheduled activities |
-| Time-to-Meeting | Average hours from match to confirmed activity |
-| Quick Alignment Usage | % of users who do video/voice call before meeting |
-| Activity Completion Rate | % of scheduled activities that actually happen |
-| User Retention (D7/D30) | Users returning after 7 and 30 days |
-| Completion Rate | % of users completing full onboarding |
+
+#### Core Product Metrics
+| Metric | Description | Target |
+|--------|-------------|--------|
+| Match-to-Activity Conversion | % of matches that result in scheduled activities | >15% |
+| Time-to-Meeting | Average hours from match to confirmed activity | <24 hours |
+| Quick Alignment Usage | % of users who do video/voice call before meeting | >40% |
+| Activity Completion Rate | % of scheduled activities that actually happen | >70% |
+| User Retention (D7/D30) | Users returning after 7 and 30 days | D7: >40%, D30: >20% |
+| Completion Rate | % of users completing full onboarding | >80% |
+
+#### Growth & Viral Metrics
+| Metric | Description | Target |
+|--------|-------------|--------|
+| K-Factor | Viral coefficient (invites sent × conversion rate) | >0.5 |
+| Invites per User | Average referral invites sent per active user | >2 |
+| Invite Conversion Rate | % of invites that result in new signups | >20% |
+| Waitlist Conversion | % of waitlist users who complete signup when area launches | >60% |
+| Time to First Invite | Hours from signup to first friend invitation | <48 hours |
+| Network Density | Active users per neighborhood | >500 for launch |
+| Share Rate | % of users who share after positive activity feedback | >15% |
+
+#### Engagement Metrics
+| Metric | Description | Target |
+|--------|-------------|--------|
+| DAU/MAU Ratio | Daily active users / Monthly active users | >30% |
+| Swipes per Session | Average profile interactions per app open | >15 |
+| Notification Open Rate | % of push notifications that drive app opens | >25% |
+| Peak Time Participation | % of users active during Friday/Saturday evenings | >50% |
+| Availability Set Rate | % of sessions where user sets availability | >70% |
 
 ---
 
-## 5. Core Features & User Flows
+## 5. Viral Growth & Distribution Strategy
 
-### 5.1 User Journey Overview
+### 5.1 Growth Philosophy
+
+**The cold, hard truth:** Dating apps live or die by network density. You need enough attractive, available people in the same area at the same time, or the product is worthless. This isn't a "nice to have"—it's existential.
+
+FAST's time-slot mechanic creates a unique constraint: we need people available at overlapping times. This means we need **10x the user density** of a typical dating app to deliver value.
+
+**The good news:** This same constraint creates urgency and FOMO that can fuel viral growth—if we architect it correctly.
+
+### 5.2 Viral Loop Architecture
+
+#### Primary Viral Loop: "Tonight's Activity" Share
+```
+User sets availability → Sees "X people available for [activity] tonight" →
+User has great meetup → Shares success → Friend downloads → Loop repeats
+```
+
+#### Secondary Viral Loop: "Activity Invite"
+```
+User wants to do activity → Not enough matches available →
+Prompted to "Invite friends to unlock more people" →
+Friend joins → Both users see expanded pool → Value delivered
+```
+
+#### Tertiary Viral Loop: "Waitlist FOMO"
+```
+User in waitlisted area → Sees "247 people ahead of you in Koramangala" →
+User shares to unlock faster access → Friends join waitlist → Density builds before launch
+```
+
+### 5.3 K-Factor Optimization
+
+| Metric | Target | Mechanism |
+|--------|--------|-----------|
+| **Invites sent per user** | 3+ | Activity invite prompts, unlock features |
+| **Invite acceptance rate** | 25%+ | Pre-written messages, social proof |
+| **Time to first invite** | <24 hours | Prompted after first match or activity |
+
+### 5.4 Core Viral Features
+
+#### Feature 1: Activity Heatmap (Social Proof Engine)
+Show real-time activity to create urgency:
+- "🔥 47 people available for Drinks tonight in Indiranagar"
+- "☕ 23 people want Coffee this weekend in Koramangala"
+- Numbers update in real-time
+- **Critical:** Only show when numbers are impressive (>15 for an activity)
+
+#### Feature 2: "Unlock More" Mechanic
+When a user runs out of profiles to swipe:
+- "Want to see more people available for [activity]?"
+- "Invite 2 friends to unlock 20 more profiles"
+- Alternative: "Share your availability to unlock"
+
+#### Feature 3: Success Story Prompts
+After a completed activity (user confirms they met):
+- "How was drinks with Priya? 🍻"
+- Options: "Amazing!" / "Good vibes" / "Not my type"
+- If positive: "Your friends would love this. Share your experience?"
+- Pre-written, privacy-safe share: "Just had a great time meeting someone new on FAST. Way better than endless texting 💬→🍻"
+
+#### Feature 4: Neighborhood Leaderboard
+- "Most active neighborhoods this week"
+- Shows which areas have most activity
+- Creates FOMO for users in less active areas
+- Drives word-of-mouth in hot neighborhoods
+
+#### Feature 5: "Your Friends on FAST" (Phase 2)
+- Contact sync (optional, with clear privacy controls)
+- "3 of your contacts are on FAST"
+- Never reveal who—just the number
+- Creates curiosity and normalizes usage
+
+### 5.5 Anti-Viral Patterns to Avoid
+
+| Pattern | Why It Kills Growth |
+|---------|---------------------|
+| Empty states | "No one available" destroys retention. Never show this. |
+| Slow onboarding | Every extra second = 10% drop-off. Target <90 seconds to first swipe. |
+| Requiring too much upfront | 4 photos is aggressive. Consider 2 required, 2 optional. |
+| No immediate value | User must see appealing profiles within first session or they churn. |
+| Generic sharing | "Share FAST" doesn't work. Share moments, not apps. |
+
+### 5.6 Network Effect Multipliers
+
+#### Density Thresholds
+| User Density | User Experience |
+|--------------|-----------------|
+| <100 users/neighborhood | **Unusable.** User sees few/no matches. |
+| 100-500 users/neighborhood | **Marginal.** Occasional matches, high churn risk. |
+| 500-2000 users/neighborhood | **Good.** Regular matches, product works. |
+| 2000+ users/neighborhood | **Excellent.** Real-time availability matching. |
+
+**Strategy implication:** Launch narrow and deep. One neighborhood at 2000 users beats 10 neighborhoods at 200 users each.
+
+---
+
+## 6. Launch Playbook
+
+### 6.1 Pre-Launch Phase: Build Density Before Opening
+
+#### Waitlist Strategy
+1. **Landing page** with area selection
+2. **"Your area isn't live yet"** message with waitlist signup
+3. **Show position in line** for their specific area
+4. **Unlock faster access** by sharing/inviting friends
+
+#### Waitlist Viral Mechanics
+| Action | Reward |
+|--------|--------|
+| Sign up | Position #X in line |
+| Share unique link | Move up 10 spots per signup |
+| 3 friends join | Guaranteed early access |
+| 10 friends join | VIP access + profile boost |
+
+#### Target Density Before Launch
+- Minimum 500 waitlist signups per neighborhood before going live
+- Ideal: 1000+ signups with 60%+ completing pre-registration
+
+### 6.2 Launch Sequence: City-by-City, Neighborhood-by-Neighborhood
+
+#### Phase 1: Bangalore Pilot (Weeks 1-8)
+| Week | Focus Area | Target Users |
+|------|------------|--------------|
+| 1-2 | Indiranagar only | 500 active |
+| 3-4 | Indiranagar + Koramangala | 1500 active |
+| 5-6 | Add HSR Layout | 3000 active |
+| 7-8 | Full Bangalore (6 neighborhoods) | 6000 active |
+
+#### Phase 2: Expansion (Weeks 9-16)
+- Mumbai launch (same neighborhood-by-neighborhood approach)
+- Delhi NCR launch
+- Hyderabad launch
+
+### 6.3 Launch Day Tactics
+
+#### "Launch Night" Event Mechanic
+For each neighborhood launch:
+1. All waitlisted users get access at same time (7 PM on a Thursday/Friday)
+2. **"Launch Night Special"**: First 2 hours, everyone's availability is set to "Tonight"
+3. Creates immediate activity surge and matches
+4. Users who match during launch get "Founding Member" badge
+
+#### First 48 Hours
+| Hour | Action |
+|------|--------|
+| 0 | Open access, send "You're in!" notification |
+| 2 | Send "X people available tonight in [area]" |
+| 24 | "Yesterday's stats: X meetups happened in [area]" |
+| 48 | "This weekend: X people planning activities" |
+
+### 6.4 Cold Start Solutions
+
+#### Problem: New user signs up, no one is available
+**Solutions:**
+1. **Stagger availability display**: Show profiles with upcoming availability (next 48-72 hours), not just "right now"
+2. **"Notify me" option**: "No one's available for Drinks tonight. Get notified when someone is?"
+3. **Activity scheduling**: "Set your availability for later this week and we'll match you"
+4. **Never show zero**: If <3 profiles available, show a friendly "More people coming soon! Invite friends to speed it up"
+
+#### Problem: Gender imbalance (common in dating apps)
+**Solutions:**
+1. **Women-first access**: Give women earlier access to build the more valuable side first
+2. **Activity-based framing**: Position as "activity partners" not "dating" in initial marketing
+3. **Women-only referrals**: Let women earn rewards for inviting other women
+4. **Quality control**: More aggressive filtering on male profiles initially
+
+---
+
+## 7. Notification Strategy
+
+### 7.1 Notification Philosophy
+
+**Rule #1:** Every notification must deliver value or create anticipation. No "engagement bait."
+
+**Rule #2:** Notifications are the primary re-engagement mechanism. Master this or die.
+
+**Rule #3:** Timing matters more than content. A mediocre notification at the right time beats a perfect notification at the wrong time.
+
+### 7.2 Notification Types & Triggers
+
+#### Tier 1: High-Priority (Always Send)
+| Trigger | Notification | Timing |
+|---------|--------------|--------|
+| New match | "You matched with [Name]! You both want [Activity]" | Immediate |
+| Message received | "[Name]: [Message preview]" | Immediate |
+| Call request received | "[Name] wants to do a quick call before meeting" | Immediate |
+| Match available NOW | "☕ [Name] is available for Coffee right now in [Area]" | Immediate |
+
+#### Tier 2: Engagement (Smart Timing)
+| Trigger | Notification | Timing |
+|---------|--------------|--------|
+| Unread matches | "You have 3 matches waiting. [Name] is available tonight" | 6 PM local |
+| Popular time approaching | "🔥 Peak time for Drinks in [Area] starts in 2 hours" | 5 PM Fri/Sat |
+| Activity surge | "23 people just set availability for [Activity] tonight" | Real-time when threshold hit |
+| Match's availability starting | "[Name] is available starting now" | When their time slot begins |
+
+#### Tier 3: Re-engagement (Lapsed Users)
+| Trigger | Notification | Timing |
+|---------|--------------|--------|
+| 3 days inactive | "Miss us? 12 new people in [Area] want [Their top activity]" | 6 PM |
+| 7 days inactive | "People are meeting up without you. [X] activities happened this week" | Weekend morning |
+| Match went inactive | "Looks like [Name] hasn't been active. Keep swiping?" | After 48 hours |
+
+### 7.3 Time-Slot Specific Notifications
+
+**The killer feature of FAST:** Notifications tied to real-time availability.
+
+| Scenario | Notification | Why It Works |
+|----------|--------------|--------------|
+| Match becomes available | "🟢 [Name] is available NOW for Drinks" | Creates urgency, drives immediate action |
+| Availability overlap | "You and [Name] are both free 7-9 PM. Message them!" | Removes scheduling friction |
+| Peak time alert | "Tonight's the night! 34 people available for activities in [Area]" | Social proof + urgency |
+| Upcoming availability | "Your availability starts in 1 hour. Ready to meet someone?" | Primes the user |
+
+### 7.4 Notification Timing Rules
+
+| Day | Best Times | Avoid |
+|-----|------------|-------|
+| Mon-Thu | 12-1 PM, 6-8 PM | Before 10 AM, after 10 PM |
+| Friday | 12-1 PM, 4-7 PM | After 9 PM (they're out) |
+| Saturday | 11 AM-1 PM, 4-6 PM | Morning (sleeping), late night |
+| Sunday | 11 AM-2 PM, 5-7 PM | Evening (prep for Monday) |
+
+### 7.5 Notification Caps
+
+| Type | Daily Max | Weekly Max |
+|------|-----------|------------|
+| Match notifications | Unlimited | Unlimited |
+| Message notifications | Unlimited | Unlimited |
+| Engagement notifications | 2 | 8 |
+| Re-engagement notifications | 1 | 3 |
+
+### 7.6 Push vs. In-App Notifications
+
+| Content | Push | In-App | SMS (backup) |
+|---------|------|--------|--------------|
+| New match | ✓ | ✓ | - |
+| New message | ✓ | ✓ | After 1 hour unread |
+| Availability reminder | ✓ | ✓ | - |
+| Activity surge | ✓ | ✓ | - |
+| Weekly digest | - | ✓ | - |
+
+---
+
+## 8. Core Features & User Flows
+
+### 8.1 User Journey Overview
 ```
 Welcome → Login/Signup → Profile Creation → Activity & Availability Setup → Discovery → Matching → Chat → Quick Alignment (optional) → Activity Together
 ```
 
 **Key principle:** The journey leads to a shared activity, not a "date." Users are meeting to do something together, which removes pressure and creates natural conversation.
 
-### 5.2 Authentication Flow
+### 8.2 Authentication Flow
 
 #### Welcome Screen
 - Display FAST branding with login and signup options
@@ -177,7 +447,7 @@ Welcome → Login/Signup → Profile Creation → Activity & Availability Setup 
 - OTP verification screen
 - **Prototype behavior:** Auto-fill dummy OTP to proceed
 
-### 5.3 Profile Creation (Onboarding)
+### 8.3 Profile Creation (Onboarding)
 
 #### Step 1: Basic Information
 - **Name:** Text input
@@ -250,7 +520,7 @@ Welcome → Login/Signup → Profile Creation → Activity & Availability Setup 
 - Modern illustration/animation in neon-dark theme
 - Emphasizes activity, not "dating" or "finding a partner"
 
-### 5.4 Discovery & Matching
+### 8.4 Discovery & Matching
 
 #### Matching Philosophy
 Users are matched based on **shared activities**, not explicit relationship intent. When you see a profile, it means:
@@ -293,7 +563,7 @@ This session filter narrows discovery to profiles that match the selected activi
 - **Match popup:** Display for 1 out of every 3 likes
 - Do NOT auto-navigate to chat after like
 
-### 5.5 Matches Screen
+### 8.5 Matches Screen
 
 #### Display Requirements
 - Show **name** prominently
@@ -301,7 +571,7 @@ This session filter narrows discovery to profiles that match the selected activi
 - Show **availability as time range** (e.g., "6–8 PM", "7–9 PM")
 - Shared activity + availability slot are the key decision factors for who to message first
 
-### 5.6 Chat Screen
+### 8.6 Chat Screen
 
 #### Header
 - Display: **Name, Age, Shared Activity, Availability slot**
@@ -344,25 +614,152 @@ Once both users agree to meet:
 - Call acts as vibe check before committing to in-person activity
 - On-screen keyboard visible for realism
 
-### 5.7 Time & Calendar
+### 8.7 Time & Calendar
 
 #### Availability Selection
 - Remove "now" from time slot options
 - Calendar picker for **next 7 days**
 - Time ranges (not single times)
 
+### 8.8 Time-Based Urgency & FOMO Mechanics
+
+These features leverage FAST's unique time-slot mechanic to create urgency and drive action.
+
+#### Expiring Availability Windows
+- When a user's availability window is ending: "⏰ [Name]'s availability ends in 30 minutes"
+- Creates urgency to message/meet before the window closes
+- Match cards show countdown for users available "right now"
+
+#### "Available Now" Priority
+- Profiles of users currently in their availability window get **priority placement**
+- Visual indicator: Pulsing green dot + "Available now until 9 PM"
+- These profiles appear first in discovery feed
+
+#### "Tonight's Last Call"
+- At 8 PM: Show banner "Last chance for tonight! 12 people still available"
+- Creates end-of-day urgency for users who haven't made plans
+- Tap to see profiles available for remainder of evening
+
+#### Activity Countdown
+- When viewing a profile: "Both available for Drinks in 2 hours"
+- Shows how soon the overlap window begins
+- Creates anticipation and prompts early messaging
+
+#### "Peak Time" Alerts
+- Friday/Saturday 5-7 PM: "🔥 Peak time starting! 47 people setting availability now"
+- Push notification drives users to set their own availability
+- In-app banner shows real-time counter
+
+#### Missed Opportunity Nudges
+- If user was matched but didn't message, and the match's availability passed:
+- "You missed [Name]'s availability window. They're available again Saturday"
+- Creates regret and drives faster action on future matches
+
+#### Weekly FOMO Summary
+- Sunday evening: "This week on FAST: 234 activities happened in Indiranagar"
+- Shows what user missed by not being active
+- "Set your availability for next week?"
+
+### 8.9 Viral Feature Screens
+
+#### 8.9.1 Waitlist Screen (Pre-Launch)
+**Entry Point:** New user in unlaunched area
+
+**Screen Elements:**
+- "FAST is coming to [Area]"
+- Your position: "#247 in line"
+- "Share to move up"
+- Pre-written share message with unique referral link
+- Progress bar showing how close area is to launch
+- "Get early access: Invite 3 friends"
+
+**Actions:**
+- Share to WhatsApp/Instagram/Twitter
+- Copy referral link
+- See friends who've joined
+
+#### 8.9.2 Activity Heatmap Screen
+**Entry Point:** Discovery screen header tap or dedicated tab
+
+**Screen Elements:**
+- Map view of current city/area
+- Heat overlay showing activity concentration
+- List view toggle:
+  - "🔥 Drinks — 47 people tonight"
+  - "☕ Coffee — 23 people this weekend"
+  - "🎨 Pottery — 8 people this week"
+- Tap activity → Filter discovery to that activity
+
+**Social Proof Elements:**
+- Real-time counter updates
+- "12 new people joined in last hour"
+- Trending activity badge
+
+#### 8.9.3 "Unlock More" Modal
+**Trigger:** User runs out of profiles to swipe
+
+**Screen Elements:**
+- "Want to see more people for [Activity]?"
+- "Invite 2 friends to unlock 20 more profiles"
+- Friend invite buttons (WhatsApp, SMS, Copy Link)
+- Alternative: "Share your availability to unlock"
+- Skip option (subtle)
+
+**Psychology:** Creates investment through referral, not frustration through paywall
+
+#### 8.9.4 Post-Activity Feedback Screen
+**Trigger:** 2 hours after scheduled activity time
+
+**Screen Elements:**
+- "How was [Activity] with [Name]? 🍻"
+- Quick feedback options:
+  - "Amazing! 🌟"
+  - "Good vibes 👍"
+  - "Not my type 😐"
+- If positive feedback:
+  - "Your friends would love this"
+  - Pre-written, privacy-safe share card
+  - "Share to Instagram Stories" / "Share to WhatsApp"
+- Skip option
+
+#### 8.9.5 Neighborhood Leaderboard Screen
+**Entry Point:** Profile tab or weekly notification
+
+**Screen Elements:**
+- "Most active neighborhoods this week"
+- Ranked list:
+  - "🥇 Indiranagar — 156 activities"
+  - "🥈 Koramangala — 134 activities"
+  - "🥉 HSR Layout — 98 activities"
+- User's neighborhood highlighted
+- "Your area: #4 — Help it climb! Set your availability"
+
+#### 8.9.6 "Your Stats" Screen
+**Entry Point:** Profile tab
+
+**Screen Elements:**
+- Personal activity metrics:
+  - "Activities completed: 4"
+  - "Matches this month: 12"
+  - "Response rate: 87%"
+- Badges earned:
+  - "Founding Member" (early adopter)
+  - "Weekend Warrior" (3+ activities)
+  - "Quick Responder" (<1 hour reply time)
+- Share stats card option (privacy-controlled)
+
 ---
 
-## 6. Functional Requirements
+## 9. Functional Requirements
 
-### 6.1 Authentication
+### 9.1 Authentication
 | ID | Requirement | Priority |
 |----|-------------|----------|
 | AUTH-01 | Support phone number + OTP login | P0 |
 | AUTH-02 | Support both new signup and returning user login | P0 |
 | AUTH-03 | Prototype: Auto-fill dummy OTP for testing | P0 |
 
-### 6.2 Profile Management
+### 9.2 Profile Management
 | ID | Requirement | Priority |
 |----|-------------|----------|
 | PROF-01 | Name and age capture with modern UI controls | P0 |
@@ -374,7 +771,7 @@ Once both users agree to meet:
 | PROF-07 | Area selection with location-aware suggestions | P0 |
 | PROF-08 | No explicit "looking for" or relationship intent fields | P0 |
 
-### 6.3 Discovery
+### 9.3 Discovery
 | ID | Requirement | Priority |
 |----|-------------|----------|
 | DISC-01 | Generate 100+ fake profiles for prototype | P0 |
@@ -394,7 +791,7 @@ Once both users agree to meet:
 | DISC-15 | Session-based availability setting (set time slot for today) | P0 |
 | DISC-16 | Allow matching with non-overlapping time slots (negotiate in chat) | P0 |
 
-### 6.4 Matching & Chat
+### 9.4 Matching & Chat
 | ID | Requirement | Priority |
 |----|-------------|----------|
 | CHAT-01 | Match list showing name + shared activity + availability range | P0 |
@@ -410,18 +807,73 @@ Once both users agree to meet:
 | CHAT-11 | Quick Alignment banner when both users prefer a call | P0 |
 | CHAT-12 | On-screen keyboard UI (always accessible) | P2 |
 
-### 6.5 Calendar & Scheduling
+### 9.5 Calendar & Scheduling
 | ID | Requirement | Priority |
 |----|-------------|----------|
 | CAL-01 | 7-day calendar picker for availability | P0 |
 | CAL-02 | Time range selection (not single times) | P0 |
 | CAL-03 | No "now" option in time slots | P0 |
 
+### 9.6 Growth & Viral Features
+| ID | Requirement | Priority |
+|----|-------------|----------|
+| GROW-01 | Waitlist system with position tracking | P0 |
+| GROW-02 | Referral link generation (unique per user) | P0 |
+| GROW-03 | "Move up the waitlist" mechanic via referrals | P0 |
+| GROW-04 | Activity heatmap showing real-time user counts by activity | P0 |
+| GROW-05 | "Unlock More" modal when swiping pool exhausted | P0 |
+| GROW-06 | Post-activity feedback collection | P0 |
+| GROW-07 | Shareable success story cards (privacy-safe) | P1 |
+| GROW-08 | Neighborhood leaderboard | P1 |
+| GROW-09 | User stats and badges system | P1 |
+| GROW-10 | "Your Friends on FAST" contact sync (Phase 2) | P2 |
+| GROW-11 | Pre-written share messages for WhatsApp/Instagram | P0 |
+| GROW-12 | Early access rewards for referrers | P0 |
+
+### 9.7 Urgency & FOMO
+| ID | Requirement | Priority |
+|----|-------------|----------|
+| URG-01 | Expiring availability countdown on match cards | P0 |
+| URG-02 | "Available Now" priority placement with pulsing indicator | P0 |
+| URG-03 | "Tonight's Last Call" banner at 8 PM | P1 |
+| URG-04 | Activity countdown showing time until overlap window | P1 |
+| URG-05 | "Peak Time" alerts on Friday/Saturday evenings | P0 |
+| URG-06 | Missed opportunity nudges for expired availability windows | P1 |
+| URG-07 | Weekly FOMO summary notification | P1 |
+| URG-08 | Real-time activity surge counters | P0 |
+
+### 9.8 Notifications
+| ID | Requirement | Priority |
+|----|-------------|----------|
+| NOTIF-01 | Push notification for new matches | P0 |
+| NOTIF-02 | Push notification for new messages | P0 |
+| NOTIF-03 | Push notification for call requests | P0 |
+| NOTIF-04 | "Match available NOW" real-time notification | P0 |
+| NOTIF-05 | Unread matches reminder (6 PM timing) | P1 |
+| NOTIF-06 | Peak time approaching notification | P1 |
+| NOTIF-07 | Activity surge notification (threshold: 15+ users) | P1 |
+| NOTIF-08 | Match's availability starting notification | P0 |
+| NOTIF-09 | Re-engagement notifications (3-day, 7-day inactive) | P1 |
+| NOTIF-10 | Smart notification timing based on day of week | P1 |
+| NOTIF-11 | Notification caps (daily/weekly limits per type) | P0 |
+| NOTIF-12 | SMS fallback for unread messages (1 hour delay) | P2 |
+
+### 9.9 Launch & Waitlist
+| ID | Requirement | Priority |
+|----|-------------|----------|
+| LAUNCH-01 | Area-based waitlist with position display | P0 |
+| LAUNCH-02 | Progress bar showing area's progress to launch | P0 |
+| LAUNCH-03 | "Launch Night" simultaneous access release | P0 |
+| LAUNCH-04 | Founding Member badge for early adopters | P1 |
+| LAUNCH-05 | Women-first access queue | P0 |
+| LAUNCH-06 | Neighborhood density tracking (500 minimum threshold) | P0 |
+| LAUNCH-07 | "Area not live" fallback screen with waitlist CTA | P0 |
+
 ---
 
-## 7. Design System & Brand Guidelines
+## 10. Design System & Brand Guidelines
 
-### 7.1 Brand Identity
+### 10.1 Brand Identity
 
 #### Brand Positioning
 - **Premium, confident, modern, distraction-free focus** (Black)
@@ -441,7 +893,7 @@ Once both users agree to meet:
 | Inner glow (optional) | 6–10px blur, 12–18% opacity |
 | Application | Logo and key active elements only—never large backgrounds |
 
-### 7.2 Color Palette
+### 10.2 Color Palette
 
 #### Primary Colors
 | Name | Hex | Usage |
@@ -462,7 +914,7 @@ Once both users agree to meet:
 - **Avoid:** Large background areas—neon is the "spark," not the wallpaper
 - High contrast improves scannability and supports rapid decisions
 
-### 7.3 Typography
+### 10.3 Typography
 
 | Element | Size | Weight | Line Height |
 |---------|------|--------|-------------|
@@ -471,7 +923,7 @@ Once both users agree to meet:
 | Body | 15–16px | Regular | 150% |
 | Caption/Meta | 12–13px | Medium | 140% |
 
-### 7.4 Layout & Spacing
+### 10.4 Layout & Spacing
 
 **Grid:** 8pt grid throughout
 
@@ -482,7 +934,7 @@ Once both users agree to meet:
 | Component spacing | 12–16px between related elements |
 | Safe top padding | 16–24px (device dependent) |
 
-### 7.5 Component Specifications
+### 10.5 Component Specifications
 
 #### Buttons
 | Property | Value |
@@ -521,9 +973,9 @@ Once both users agree to meet:
 
 ---
 
-## 8. Appendix
+## 11. Appendix
 
-### 8.1 Glossary
+### 11.1 Glossary
 | Term | Definition |
 |------|------------|
 | Activity-first matching | Core FAST philosophy: users match based on shared activities (not explicit relationship intent), creating natural reasons to meet |
@@ -535,23 +987,34 @@ Once both users agree to meet:
 | Session-based filtering | Setting activity and availability for the current browsing session before swiping |
 | Shared Activity | The activity both users have selected (e.g., pottery, coffee), displayed prominently as the reason for the match |
 | Venue discussion phase | Chat phase where users suggest and agree on specific meeting locations |
+| Activity Heatmap | Real-time display showing user counts per activity, creating social proof and urgency |
+| K-Factor | Viral coefficient measuring how many new users each existing user brings |
+| Network Density | Number of active users per neighborhood; critical threshold for product value |
+| Waitlist Mechanic | Pre-launch system that builds user density before opening an area |
+| FOMO (Fear of Missing Out) | Psychological driver used in urgency features to prompt action |
+| Launch Night | Coordinated release event where all waitlisted users get access simultaneously |
+| Unlock More | Referral-gated feature that reveals additional profiles after friend invites |
 
-### 8.2 Out of Scope (v1.0)
+### 11.2 Out of Scope (v1.0)
 - Payment/subscription features
 - Real location services (prototype uses hardcoded Bangalore areas)
 - Real OTP verification
 - Backend matching algorithm
-- Push notifications
 - Profile verification
+- Contact sync ("Your Friends on FAST")
 
-### 8.3 Future Considerations
-- Expand to other Tier 1 cities
+### 11.3 Future Considerations
+- Expand to other Tier 1 cities (Mumbai, Delhi NCR, Hyderabad)
 - Add women-focused safety features
 - Implement premium tiers
 - Add group date features
 - Integrate with calendar apps
+- Contact sync for social proof ("3 friends on FAST")
+- Cross-city matching for travelers
+- Activity venue partnerships
+- In-app activity booking
 
-### 8.4 Sample User Journey
+### 11.4 Sample User Journey
 
 This end-to-end example illustrates how FAST is intended to be used:
 
