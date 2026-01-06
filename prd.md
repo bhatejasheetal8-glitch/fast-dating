@@ -23,22 +23,31 @@
 ## 1. Executive Summary
 
 ### 1.1 Product Vision
-FAST is a dating app designed for **India's "instant" culture**—quick commerce, reels, low attention spans. Instead of endless chatting, it makes **intent + availability + activity + expectations** visible upfront, so people can move from match → meeting with minimal friction.
+FAST is a dating app designed for **India's "instant" culture**—quick commerce, reels, low attention spans. Instead of endless chatting, it makes **activity + availability + expectations** visible upfront, so people can move from match → meeting with minimal friction.
 
-### 1.2 Core Value Proposition
+### 1.2 Core Philosophy: Activity-First, Not Partner-First
+**The most important principle of FAST:** Intentions are never stated explicitly. Users don't declare they're "looking for a relationship" or "finding a partner"—that creates pressure and awkwardness.
+
+Instead, users simply choose **activities they want to do** (pottery, coffee, live music, etc.). When two people share interest in the same activity, they can meet to do that activity together. The meeting feels natural because there's a pre-decided, shared purpose—not a high-stakes "date" evaluation.
+
+> **Why this works:** "Let's do pottery together" feels lighter than "Let's see if we're compatible partners." The activity becomes the reason to meet, and any romantic connection emerges organically.
+
+### 1.3 Core Value Proposition
 **"Less talking, more meeting (without the awkwardness)."**
 
 FAST is especially helpful for:
 - **Busy professionals** who lack time for endless back-and-forth
 - **Introverts** who struggle with performative chat dynamics
 
-### 1.3 Key Differentiators
+### 1.4 Key Differentiators
 | Traditional Dating Apps | FAST |
 |------------------------|------|
-| Endless chatting before meeting | Intent-first, availability-led discovery |
+| Explicit "looking for relationship" labels | Activity-first matching—no stated romantic intent |
+| Endless chatting before meeting | Shared activity gives natural reason to meet |
 | Manual bio writing | Auto-generated introductions from quick questions |
 | Ambiguous scheduling | Clear time slots visible on profiles |
 | Ghosting cycles | Structured, low-pressure interactions |
+| Catfishing risk | Quick alignment via video/voice call before meeting |
 
 ---
 
@@ -52,20 +61,22 @@ FAST is especially helpful for:
 | **Mental exhaustion** | Dating app interactions feel like a chore |
 | **Ghosting cycles** | Conversations fizzle without real-world meetings |
 | **Scheduling friction** | No clear way to align availability |
-| **Intent confusion** | Unclear what the other person is looking for |
+| **High-pressure framing** | "Looking for a partner" creates awkward expectations |
+| **No reason to meet** | Without a shared activity, meetings feel like interviews |
+| **Catfishing anxiety** | No way to verify if the person is genuine before meeting |
 | **Time wastage** | Investment in chats that lead nowhere |
 
 ### 2.2 How FAST Solves These Problems
 | Solution | Implementation |
 |----------|----------------|
-| **Intent-first** | Users declare what they're looking for upfront |
+| **Activity-first matching** | Users choose activities they want to do; matches happen based on shared interests—no explicit "looking for partner" labels |
+| **Natural meeting context** | When both parties want to do pottery (or any activity), the meeting has built-in purpose and lower pressure |
 | **Clear expectations** | Bill preferences, activity types visible on profile |
 | **Auto introductions & quick replies** | No typing required to start conversations |
 | **Small talk made easy** | Pre-built conversation starters and quick responses |
-| **Time-based matching** | Availability slots shown prominently |
-| **Availability-led discovery** | Match with people free at the same time |
+| **Availability-led discovery** | Users see others' time slots based on distance settings; optional filter to show only people available in user's own time slot |
 | **Introvert-friendly flow** | Structured interactions reduce social anxiety |
-| **Quick alignment** | See compatibility before investing time |
+| **Quick alignment** | Video/voice call option to check the vibe and verify the person is genuine before meeting in person (anti-catfishing) |
 
 ---
 
@@ -75,7 +86,7 @@ FAST is especially helpful for:
 Urban India (Tier 1 cities), starting with Bangalore
 
 ### 3.2 Jobs To Be Done
-> "Help me quickly find a compatible match and set up a low-effort meeting time without awkward planning or endless chatting."
+> "Help me find someone who wants to do the same activity as me, at a time that works for both of us, so we can meet naturally without the pressure of a traditional 'date.'"
 
 ### 3.3 User Personas
 
@@ -114,18 +125,20 @@ Urban India (Tier 1 cities), starting with Bangalore
 ## 4. Product Goals & Success Metrics
 
 ### 4.1 Primary Goals
-1. Reduce time from match to first meeting
-2. Increase meeting conversion rate (matches that become dates)
-3. Decrease ghosting rate through structured interactions
-4. Create an introvert-friendly dating experience
+1. Reduce time from match to first activity together
+2. Increase meeting conversion rate (matches that become real-world activities)
+3. Decrease ghosting rate through shared activity purpose
+4. Create a low-pressure, activity-focused meeting experience
+5. Reduce catfishing through quick alignment (video/voice verification)
 
 ### 4.2 Key Performance Indicators (KPIs)
 | Metric | Description |
 |--------|-------------|
-| Match-to-Date Conversion | % of matches that result in scheduled meetings |
-| Time-to-Meeting | Average hours from match to confirmed date |
+| Match-to-Activity Conversion | % of matches that result in scheduled activities |
+| Time-to-Meeting | Average hours from match to confirmed activity |
+| Quick Alignment Usage | % of users who do video/voice call before meeting |
+| Activity Completion Rate | % of scheduled activities that actually happen |
 | User Retention (D7/D30) | Users returning after 7 and 30 days |
-| Chat Engagement | Messages sent per match |
 | Completion Rate | % of users completing full onboarding |
 
 ---
@@ -134,8 +147,10 @@ Urban India (Tier 1 cities), starting with Bangalore
 
 ### 5.1 User Journey Overview
 ```
-Welcome → Login/Signup → Profile Creation → Preferences → Discovery → Matching → Chat → Date
+Welcome → Login/Signup → Profile Creation → Activity & Availability Setup → Discovery → Matching → Chat → Quick Alignment (optional) → Activity Together
 ```
+
+**Key principle:** The journey leads to a shared activity, not a "date." Users are meeting to do something together, which removes pressure and creates natural conversation.
 
 ### 5.2 Authentication Flow
 
@@ -182,11 +197,20 @@ Welcome → Login/Signup → Profile Creation → Preferences → Discovery → 
 - Icon: **₹ (Rupee symbol)**
 - Options: Split 50–50 / Alternate / My treat
 
-#### Step 5: Pre-Meeting Preferences
-- Options include: 5-minute voice call / 5-minute video call
+#### Step 5: Quick Alignment Preference
+**Purpose:** Let users verify the other person's vibe before meeting in person—helps prevent catfishing and ensures genuine connection.
 
-#### Step 6: Activity Selection
-- Coffee, Movie, Drinks, Dinner, Comedy show, Walk, Museum, Live music, Board games, Dessert, Mental health talk, Books/cafe, Fitness date
+- Options: 5-minute voice call / 5-minute video call / No preference
+- This preference is shown on the user's profile
+- When both users have selected a call preference, the chat interface prominently suggests scheduling a quick call before the activity
+
+#### Step 6: Activity Selection (Core Matching Criteria)
+**This is the heart of FAST's matching logic.** Users select activities they genuinely want to do. Matches are shown based on shared activity interest.
+
+- Activities: Coffee, Movie, Drinks, Dinner, Comedy show, Walk, Museum, Live music, Board games, Dessert, Mental health talk, Books/cafe, Fitness date, Pottery, Cooking class, Art gallery
+- Users can select multiple activities
+- Discovery prioritizes users who share at least one activity preference
+- The shared activity is displayed prominently on match profiles
 
 #### Step 7: Area Selection
 - User types area name
@@ -196,19 +220,32 @@ Welcome → Login/Signup → Profile Creation → Preferences → Discovery → 
 - Use Bangalore areas only for prototype
 
 #### Onboarding Completion
-- Full-screen success message: *"We wish you the best for your date today. Let the search begin."*
+- Full-screen success message: *"You're all set! Find someone who wants to do what you love."*
 - Modern illustration/animation in neon-dark theme
+- Emphasizes activity, not "dating" or "finding a partner"
 
 ### 5.4 Discovery & Matching
+
+#### Matching Philosophy
+Users are matched based on **shared activities**, not explicit relationship intent. When you see a profile, it means:
+1. You both want to do at least one of the same activities
+2. They are within your distance settings
+3. Their availability is visible (so you can see if times might work)
+
+#### Availability-Led Discovery
+- Users see other profiles' **time slots** based on their distance settings
+- By default, all profiles within distance are shown with their availability visible
+- **Optional filter:** "Show only people available in my time slot" narrows results to overlapping availability
+- This filter is accessible from the discovery screen header
 
 #### Profile Cards
 - Generate **100+ fake profiles** with varied:
   - Availability times
-  - Interests
-  - Activity preferences
+  - Shared activity interests (the reason for the match)
   - Personality answers
 - Each profile displays **4 photos**
 - **Photo navigation:** Tap to advance to next photo (Tinder-style)
+- **Shared activities badge:** Prominently shows which activities you both selected
 
 #### Interaction Model
 - **Like button** and **Unlike button** (thumbs/tick/cross style)
@@ -222,23 +259,27 @@ Welcome → Login/Signup → Profile Creation → Preferences → Discovery → 
 
 #### Display Requirements
 - Show **name** prominently
+- Show **shared activity** (e.g., "Both want: Pottery, Coffee")
 - Show **availability as time range** (e.g., "6–8 PM", "7–9 PM")
-- Availability slot is the key decision factor
+- Shared activity + availability slot are the key decision factors for who to message first
 
 ### 5.6 Chat Screen
 
 #### Header
-- Display: **Name, Age, Availability slot**
+- Display: **Name, Age, Shared Activity, Availability slot**
 - Profile photo tap → Opens full profile
+- Shared activity shown as badge (e.g., "☕ Coffee")
 
 #### Quick Actions
 - "Send introduction" as a **chat quick-action chip**
 - Sends the **auto-generated intro** from Bio Builder
 - Mix with other tappable quick message options
+- **Activity-specific starters:** "Want to grab coffee at [time]?" based on shared activity
 
-#### Communication Options
-- Voice call button
-- Video call button
+#### Quick Alignment (Anti-Catfishing)
+- **Prominent call buttons** for voice and video call
+- If both users have selected a call preference, show banner: "You both prefer a quick call before meeting—schedule one?"
+- Call acts as vibe check before committing to in-person activity
 - On-screen keyboard visible for realism
 
 ### 5.7 Time & Calendar
@@ -266,9 +307,10 @@ Welcome → Login/Signup → Profile Creation → Preferences → Discovery → 
 | PROF-02 | Photo upload (exactly 4 photos required) | P0 |
 | PROF-03 | Bio generation from questionnaire (no manual typing) | P0 |
 | PROF-04 | Bill preference selection with ₹ icon | P1 |
-| PROF-05 | Pre-meeting preference selection | P1 |
-| PROF-06 | Activity type selection (13 options) | P0 |
+| PROF-05 | Quick alignment preference (voice/video call before meeting) | P0 |
+| PROF-06 | Activity type selection (16 options) — core matching criteria | P0 |
 | PROF-07 | Area selection with location-aware suggestions | P0 |
+| PROF-08 | No explicit "looking for" or relationship intent fields | P0 |
 
 ### 6.3 Discovery
 | ID | Requirement | Priority |
@@ -279,15 +321,22 @@ Welcome → Login/Signup → Profile Creation → Preferences → Discovery → 
 | DISC-04 | Card animations (left for unlike, right+glow for like) | P1 |
 | DISC-05 | "Send intro" popup after like (5 seconds) | P0 |
 | DISC-06 | Match popup for 1 in 3 likes | P0 |
+| DISC-07 | Match based on shared activity interest (core logic) | P0 |
+| DISC-08 | Display shared activities prominently on profile cards | P0 |
+| DISC-09 | Show availability time slots on profiles (based on distance settings) | P0 |
+| DISC-10 | Optional filter: "Show only available in my time slot" | P1 |
+| DISC-11 | Distance-based filtering | P0 |
 
 ### 6.4 Matching & Chat
 | ID | Requirement | Priority |
 |----|-------------|----------|
-| CHAT-01 | Match list showing name + availability range | P0 |
-| CHAT-02 | Chat header with name, age, availability | P0 |
+| CHAT-01 | Match list showing name + shared activity + availability range | P0 |
+| CHAT-02 | Chat header with name, age, shared activity badge, availability | P0 |
 | CHAT-03 | Quick-action chips including "Send introduction" | P0 |
-| CHAT-04 | Voice and video call buttons | P1 |
-| CHAT-05 | On-screen keyboard UI | P2 |
+| CHAT-04 | Activity-specific conversation starters | P1 |
+| CHAT-05 | Voice and video call buttons (Quick Alignment) | P0 |
+| CHAT-06 | Quick Alignment banner when both users prefer a call | P0 |
+| CHAT-07 | On-screen keyboard UI | P2 |
 
 ### 6.5 Calendar & Scheduling
 | ID | Requirement | Priority |
@@ -405,9 +454,11 @@ Welcome → Login/Signup → Profile Creation → Preferences → Discovery → 
 ### 8.1 Glossary
 | Term | Definition |
 |------|------------|
-| Availability-led discovery | Matching algorithm that prioritizes users with overlapping free time |
+| Activity-first matching | Core FAST philosophy: users match based on shared activities (not explicit relationship intent), creating natural reasons to meet |
+| Availability-led discovery | Users see other profiles' time slots based on distance settings; optional filter narrows to overlapping availability only |
 | Bio Builder | Feature that generates user bios from quick questionnaire responses |
-| Intent-first | Design philosophy where users declare dating intentions upfront |
+| Quick Alignment | Pre-meeting video/voice call to verify the other person's vibe and authenticity (anti-catfishing measure) |
+| Shared Activity | The activity both users have selected (e.g., pottery, coffee), displayed prominently as the reason for the match |
 | Journey mapping | Visual breakdown of user's end-to-end experience (steps, thoughts, emotions, pain points, opportunities) |
 
 ### 8.2 Out of Scope (v1.0)
