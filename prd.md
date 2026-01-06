@@ -301,12 +301,10 @@ The chat offers **tap-to-communicate** via quick reply chips for common response
 
 **Design principle:** Quick replies reduce friction for common exchanges, but the keyboard is always accessible. Users can type freely at any point in the conversation.
 
-#### Venue Discussion & Plan Confirmation
+#### Venue Discussion
 Once both users agree to meet:
 1. Users suggest specific venues via chat (e.g., "How about Toit in Indiranagar?")
 2. Users exchange venue suggestions and finalize timing
-3. **Plan confirmation:** Once venue and time are agreed, either user can tap "Confirm Plan" to lock in the meeting details
-4. Confirmed plans show as a **pinned card** at the top of chat with venue, time, and activity
 
 #### Quick Alignment (Anti-Catfishing)
 **Purpose:** Let users verify the other person's vibe and authenticity before meeting in person.
@@ -381,12 +379,10 @@ Once both users agree to meet:
 | CHAT-06 | Quick reply chips for venue discussion starters | P0 |
 | CHAT-07 | Activity-specific quick reply options | P1 |
 | CHAT-08 | Manual typing always available (keyboard accessible at all times) | P0 |
-| CHAT-09 | "Confirm Plan" button to lock in meeting details | P1 |
-| CHAT-10 | Pinned plan card showing confirmed venue, time, and activity | P1 |
-| CHAT-11 | Voice and video call request button (Quick Alignment) | P0 |
-| CHAT-12 | Call request/accept/decline flow | P0 |
-| CHAT-13 | Quick Alignment banner when both users prefer a call | P0 |
-| CHAT-14 | On-screen keyboard UI (always accessible) | P2 |
+| CHAT-09 | Voice and video call request button (Quick Alignment) | P0 |
+| CHAT-10 | Call request/accept/decline flow | P0 |
+| CHAT-11 | Quick Alignment banner when both users prefer a call | P0 |
+| CHAT-12 | On-screen keyboard UI (always accessible) | P2 |
 
 ### 6.5 Calendar & Scheduling
 | ID | Requirement | Priority |
@@ -508,7 +504,6 @@ Once both users agree to meet:
 | Auto-sent introduction | When a user likes a profile, their auto-generated bio is automatically sent to that person |
 | Availability-led discovery | Users see other profiles' time slots based on distance settings; optional filter narrows to overlapping availability only |
 | Bio Builder | Feature that generates user bios from quick questionnaire responses |
-| Plan confirmation | Feature that locks in meeting details (venue, time, activity) as a pinned card in chat |
 | Quick Alignment | Pre-meeting video/voice call to verify the other person's vibe and authenticity (anti-catfishing measure) |
 | Quick reply system | Tap-to-communicate chat interface using pre-built response options; minimizes typing in early conversation |
 | Session-based filtering | Setting activity and availability for the current browsing session before swiping |
@@ -571,14 +566,10 @@ This end-to-end example illustrates how FAST is intended to be used:
 20. She taps **"Request Call"** (voice)
 21. Rahul receives the request and taps **"Accept"**
 22. They have a quick 5-minute call
-23. Priya feels confident about the interaction
-
-**5:45 PM — Plan Confirmed**
-24. Priya taps **"Confirm Plan"** in the chat
-25. A pinned card appears: **"Drinks at Toit, Indiranagar — 8:30 PM"**
+23. Priya feels confident and confirms the plan on the call
 
 **8:30 PM — Activity Together**
-26. Priya and Rahul meet for drinks 🍻
+24. Priya and Rahul meet for drinks 🍻
 
 ---
 
