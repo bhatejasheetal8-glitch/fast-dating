@@ -482,7 +482,7 @@ Chesky principle: "If you can't onboard in 90 seconds, you've lost." 12 question
 │  │                           │  │
 │  └───────────────────────────┘  │
 │                                 │
-│         Edit answers            │
+│    🔄 Regenerate  •  Edit answers│
 │                                 │
 │                                 │
 │                                 │
@@ -496,8 +496,17 @@ Chesky principle: "If you can't onboard in 90 seconds, you've lost." 12 question
 **Design Notes:**
 - Generated bio in a card with subtle border
 - Bio text: 16px, 150% line height, warm and natural tone
+- "🔄 Regenerate" link generates a new bio variation with same answers
 - "Edit answers" link to go back and change responses
+- Both links are muted color, separated by bullet point
 - "Looks good" is the primary CTA
+
+**Regenerate Behavior:**
+- Tap "🔄 Regenerate" to get a new bio variation without changing answers
+- Brief loading animation (0.5s) while generating
+- New bio smoothly fades in to replace old one
+- Users can regenerate unlimited times until they find a version they love
+- Each regeneration uses the same answer data but varies phrasing, order, and tone
 
 **Bio Generation Logic:**
 - Take key answers and weave into 3-4 natural sentences
