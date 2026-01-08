@@ -316,14 +316,7 @@ After a completed activity (user confirms they met):
 - Delhi NCR launch
 - Hyderabad launch
 
-### 6.3 Launch Day Tactics
 
-#### "Launch Night" Event Mechanic
-For each neighborhood launch:
-1. All waitlisted users get access at same time (7 PM on a Thursday/Friday)
-2. **"Launch Night Special"**: First 2 hours, everyone's availability is set to "Tonight"
-3. Creates immediate activity surge and matches
-4. Users who match during launch get "Founding Member" badge
 
 #### First 48 Hours
 | Hour | Action |
@@ -707,20 +700,7 @@ These features leverage FAST's unique time-slot mechanic to create urgency and d
 
 **Psychology:** Creates investment through referral, not frustration through paywall
 
-#### 8.9.4 Post-Activity Feedback Screen
-**Trigger:** 2 hours after scheduled activity time
 
-**Screen Elements:**
-- "How was [Activity] with [Name]? 🍻"
-- Quick feedback options:
-  - "Amazing! 🌟"
-  - "Good vibes 👍"
-  - "Not my type 😐"
-- If positive feedback:
-  - "Your friends would love this"
-  - Pre-written, privacy-safe share card
-  - "Share to Instagram Stories" / "Share to WhatsApp"
-- Skip option
 
 #### 8.9.5 Neighborhood Leaderboard Screen
 **Entry Point:** Profile tab or weekly notification
@@ -734,19 +714,6 @@ These features leverage FAST's unique time-slot mechanic to create urgency and d
 - User's neighborhood highlighted
 - "Your area: #4 — Help it climb! Set your availability"
 
-#### 8.9.6 "Your Stats" Screen
-**Entry Point:** Profile tab
-
-**Screen Elements:**
-- Personal activity metrics:
-  - "Activities completed: 4"
-  - "Matches this month: 12"
-  - "Response rate: 87%"
-- Badges earned:
-  - "Founding Member" (early adopter)
-  - "Weekend Warrior" (3+ activities)
-  - "Quick Responder" (<1 hour reply time)
-- Share stats card option (privacy-controlled)
 
 ---
 
