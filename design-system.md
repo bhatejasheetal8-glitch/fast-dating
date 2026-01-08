@@ -47,7 +47,422 @@ Every visual, every word should reinforce: "You're here to do something fun with
 
 ---
 
-## Part 2: The Emotional Journey Map
+## Part 2: Mobile App Foundation
+
+### 2.1 Navigation Architecture
+
+**The Three-Tab Structure:**
+
+```
+┌─────────────────────────────────┐
+│     [Screen Content]            │
+│                                 │
+│                                 │
+│                                 │
+│                                 │
+├─────────────────────────────────┤
+│  🔍      💬        👤          │
+│ Explore  Matches  Profile       │
+└─────────────────────────────────┘
+```
+
+**Tab Bar Specifications:**
+- Height: 80px (includes safe area)
+- Background: Dark surface with subtle top border
+- Active tab: Neon icon + neon text
+- Inactive tab: Muted gray icon + text
+- Icons: 24px, outlined style when inactive, filled when active
+- Tab labels: 11px, medium weight
+- Badge on Matches tab when unread messages
+- Haptic feedback on tab switch
+
+**Tab Behavior:**
+- Tap active tab scrolls to top
+- Switching tabs saves scroll position
+- Tab bar hidden when keyboard is visible
+- Tab bar persists across all main screens
+
+---
+
+### 2.2 Status Bar
+
+**iOS:**
+- Light content (white text/icons on dark bg)
+- Height: 44px on standard devices, 59px on notched devices
+- Status bar area uses app background color
+- No custom status bar content—let system handle time, battery, signal
+
+**Android:**
+- Light content
+- Height: 24dp
+- Status bar color matches app background
+- Edge-to-edge content with proper window insets
+
+---
+
+### 2.3 Header Patterns
+
+#### Pattern A: Standard Navigation Header
+```
+┌─────────────────────────────────┐
+│ ←    Screen Title            ︙ │
+└─────────────────────────────────┘
+```
+- Height: 56px
+- Left: Back button (44px tap target)
+- Center: Screen title (18px, semibold)
+- Right: Context menu (optional)
+- Sticky: Stays at top while scrolling
+
+#### Pattern B: Large Title Header (iOS-style)
+```
+┌─────────────────────────────────┐
+│ ←                              ︙│
+│                                 │
+│ Screen Title                    │
+│                                 │
+└─────────────────────────────────┘
+```
+- Height: 96px (collapses to 56px on scroll)
+- Title: 32px bold, fades and shrinks on scroll
+- Smooth collapse animation with content
+- Used on: Profile, Matches, Discovery
+
+#### Pattern C: Contextual Header (Discovery)
+```
+┌─────────────────────────────────┐
+│  🍺 Drinks  │  7-9 PM Today   ⚙️│
+└─────────────────────────────────┘
+```
+- Height: 56px
+- Shows current filter state
+- Tappable sections to modify
+- Settings icon on right
+- Sticky at top
+
+#### Pattern D: Modal Header
+```
+┌─────────────────────────────────┐
+│        ╍╍╍╍╍╍                   │
+│                                 │
+│  ←    Modal Title          Done │
+└─────────────────────────────────┘
+```
+- Handle bar: 36px width, 5px height, centered
+- Height: 56px
+- Left: Cancel/Back
+- Right: Done/Save
+- Title: 18px, semibold, centered
+
+---
+
+### 2.4 Loading States
+
+#### Skeleton Screens
+Instead of spinners, show content placeholders:
+
+```
+┌─────────────────────────────────┐
+│  ┌───────────────────────────┐  │
+│  │▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓│  │
+│  │▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓│  │
+│  │▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓│  │
+│  ├───────────────────────────┤  │
+│  │                           │  │
+│  │ ▓▓▓▓▓▓▓  ▓▓               │  │
+│  │ ▓▓▓▓▓▓▓▓▓▓▓▓              │  │
+│  └───────────────────────────┘  │
+└─────────────────────────────────┘
+```
+
+**Skeleton Guidelines:**
+- Use for profile cards, matches list, chat history
+- Shimmer animation: subtle left-to-right gradient sweep
+- Match exact dimensions of real content
+- Duration: 0.8s per shimmer cycle
+- Background: Surface color at 30% opacity
+- Never show skeleton + spinner together
+
+#### Inline Loaders
+For actions within existing content:
+
+```
+[  Sending...  ⊙  ]  - Small spinner next to text
+```
+
+- 16px spinner, neon color
+- Always paired with action text
+- Replaces button content during action
+
+#### Full-Screen Loader
+Only for critical operations (login, initial load):
+
+```
+┌─────────────────────────────────┐
+│                                 │
+│                                 │
+│          [FAST Logo]            │
+│                                 │
+│            ⊙                    │
+│       Setting things up         │
+│                                 │
+│                                 │
+└─────────────────────────────────┘
+```
+
+---
+
+### 2.5 Error States
+
+#### Inline Error
+```
+┌─────────────────────────────────┐
+│  ┌───────────────────────────┐  │
+│  │ ⚠ Couldn't load profiles  │  │
+│  │   [Tap to retry]          │  │
+│  └───────────────────────────┘  │
+└─────────────────────────────────┘
+```
+
+#### Full-Screen Error
+```
+┌─────────────────────────────────┐
+│                                 │
+│     [Illustration: Broken       │
+│      coffee cup]                │
+│                                 │
+│     Something went wrong        │
+│                                 │
+│     We couldn't load this.      │
+│     Check your connection.      │
+│                                 │
+│  ┌───────────────────────────┐  │
+│  │      Try again            │  │
+│  └───────────────────────────┘  │
+│                                 │
+└─────────────────────────────────┘
+```
+
+#### Network Error Toast
+```
+┌─────────────────────────────────┐
+│  ⚠  No internet connection      │
+└─────────────────────────────────┘
+```
+- Appears at top, persists until connection restored
+- Yellow/orange background
+- Dismissible but reappears if still offline
+
+---
+
+### 2.6 Bottom Sheets
+
+**Usage:** Contextual actions, filters, selections
+
+```
+┌─────────────────────────────────┐
+│        ╍╍╍╍╍╍                   │
+│                                 │
+│     Filter by activity          │
+│                                 │
+│  ○ Drinks                       │
+│  ○ Coffee                       │
+│  ○ Dinner                       │
+│  ○ Pottery                      │
+│                                 │
+│  ┌───────────────────────────┐  │
+│  │      Apply                │  │
+│  └───────────────────────────┘  │
+│                                 │
+└─────────────────────────────────┘
+```
+
+**Behavior:**
+- Slides up from bottom
+- Handle bar at top (36px × 5px)
+- Drag down to dismiss
+- Tap outside to dismiss
+- Background dimmed at 60%
+- Supports 3 sizes: Compact (40%), Medium (60%), Large (90%)
+- Smooth spring animation (0.35s)
+
+---
+
+### 2.7 Pull to Refresh
+
+**Discovery & Matches screens:**
+
+```
+┌─────────────────────────────────┐
+│            ↻                    │  ← Pull indicator
+│       Pull to refresh           │
+│                                 │
+│  [Content begins...]            │
+└─────────────────────────────────┘
+```
+
+**States:**
+1. **Idle**: Hidden
+2. **Pulling**: Circular indicator rotates with pull distance
+3. **Ready**: Haptic tick, indicator fully visible
+4. **Refreshing**: Animated spinner, content stays in place
+5. **Done**: Success checkmark (0.3s), then fade out
+
+**Threshold**: 80px pull distance to trigger
+
+---
+
+### 2.8 Action Sheets
+
+**Usage:** Destructive actions, profile options
+
+```
+┌─────────────────────────────────┐
+│                                 │
+│  ╍╍╍╍╍╍                         │
+│                                 │
+│  Report this profile            │
+│  Block this user                │
+│  ────────────────────           │
+│  Cancel                         │
+│                                 │
+└─────────────────────────────────┘
+```
+
+**Specifications:**
+- Slides up from bottom
+- Destructive actions in red
+- Cancel button separated by divider
+- Tappable backdrop to dismiss
+- Haptic feedback on selection
+
+---
+
+### 2.9 Safe Area Handling
+
+**Notched Devices (iPhone X+):**
+```
+┌───────────[notch]──────────────┐
+│ ← Safe area begins (59px)      │
+│                                 │
+│     [Content area]              │
+│                                 │
+│     [Tab bar 80px]              │
+└─────────────────────────────────┘
+         ▔▔▔▔▔ (34px)  ← Home indicator
+```
+
+**Critical Rules:**
+- Never place interactive elements in top notch area
+- Bottom tab bar includes 34px bottom padding on notched devices
+- Modal sheets account for home indicator
+- Full-screen images can bleed into safe area
+- Text/buttons stay within safe area
+
+---
+
+### 2.10 Keyboard Behavior
+
+**Input Fields:**
+```
+┌─────────────────────────────────┐
+│  Message input field            │
+│  ┌───────────────────────────┐  │
+│  │ Type message...           │  │
+│  └───────────────────────────┘  │
+├─────────────────────────────────┤
+│     [System Keyboard]           │
+└─────────────────────────────────┘
+```
+
+**Behavior:**
+- Content scrolls up when keyboard appears
+- Input field sticks above keyboard
+- Tab bar hides when keyboard visible
+- Dismiss keyboard: tap outside, swipe down, or send
+- "Done" button on keyboard for single-line inputs
+- Return key label changes contextually: "Send", "Done", "Next"
+
+---
+
+### 2.11 Toast Notifications
+
+**Success:**
+```
+┌─────────────────────────────────┐
+│  ✓ Message sent                 │
+└─────────────────────────────────┘
+```
+
+**Info:**
+```
+┌─────────────────────────────────┐
+│  ℹ Your profile was updated     │
+└─────────────────────────────────┘
+```
+
+**Warning:**
+```
+┌─────────────────────────────────┐
+│  ⚠ Check your connection        │
+└─────────────────────────────────┘
+```
+
+**Specifications:**
+- Appears from top (below status bar)
+- Auto-dismiss after 3s
+- Swipe up to dismiss early
+- Max width: Screen width - 32px
+- Corner radius: 12px
+- Padding: 16px
+- Icon + text, left-aligned
+- Drop shadow for elevation
+
+---
+
+### 2.12 Badge Indicators
+
+**Tab Bar Badge:**
+```
+│  💬        │
+│ Matches  3 │  ← Red badge
+```
+
+**Profile Photo Badge:**
+```
+┌─────────┐
+│ [Photo] │ 🟢  ← Online/Available indicator
+└─────────┘
+```
+
+**Badge Specs:**
+- Minimum size: 20px × 20px
+- Background: Neon or red (depending on type)
+- Text: White, 11px, bold
+- Max two digits shown (99+)
+- Positioned top-right with -4px offset
+
+---
+
+### 2.13 Haptic Feedback Map
+
+| Action | Haptic Type | When |
+|--------|-------------|------|
+| Like swipe | Medium impact | At swipe threshold |
+| Unlike swipe | Light impact | At swipe threshold |
+| Match | Heavy impact + 2 ticks | On match popup |
+| Send message | Light impact | On send |
+| Tab switch | Selection | On tap |
+| Pull-to-refresh ready | Selection | At threshold |
+| Toggle activity | Selection | On tap |
+| Age slider | Light tick | Per year |
+| Photo advance | Light impact | Per swipe |
+| Error | Notification | On error toast |
+| Success | Success | On success toast |
+
+---
+
+## Part 3: The Emotional Journey Map
 
 ### The User's Emotional Arc
 
@@ -69,15 +484,18 @@ Each phase has specific emotional needs:
 
 ---
 
-## Part 3: Screen-by-Screen Design Specifications
+## Part 4: Screen-by-Screen Design Specifications
 
-### 3.1 Welcome & Onboarding
+### 4.1 Welcome & Onboarding
 
 #### Screen 1: Welcome Screen
 
 **Layout:**
 ```
-┌─────────────────────────────────┐
+┌─────────────────────────────────┐ ← Status bar
+│ 9:41        ⚡ 5G       █▌▌▌ 87% │
+├─────────────────────────────────┤
+│                                 │
 │                                 │
 │         [FAST Logo]             │
 │      with subtle neon glow      │
@@ -91,6 +509,7 @@ Each phase has specific emotional needs:
 │     at pottery wheel, laughing] │
 │                                 │
 │                                 │
+│                                 │
 │  ┌───────────────────────────┐  │
 │  │      Get Started          │  │
 │  └───────────────────────────┘  │
@@ -99,6 +518,7 @@ Each phase has specific emotional needs:
 │           Log in                │
 │                                 │
 └─────────────────────────────────┘
+           ▔▔▔▔▔  ← Home indicator
 ```
 
 **Design Notes:**
@@ -117,8 +537,11 @@ The tagline "Less talking. More meeting." does the heavy lifting. It's not about
 
 **Layout:**
 ```
-┌─────────────────────────────────┐
-│  ←                              │
+┌─────────────────────────────────┐ ← Status bar
+│ 9:41        ⚡ 5G       █▌▌▌ 87% │
+├─────────────────────────────────┤
+│  ←                              │ ← Header (56px)
+├─────────────────────────────────┤
 │                                 │
 │     What's your number?         │
 │                                 │
@@ -141,6 +564,7 @@ The tagline "Less talking. More meeting." does the heavy lifting. It's not about
 │    to our Terms & Privacy       │
 │                                 │
 └─────────────────────────────────┘
+           ▔▔▔▔▔
 ```
 
 **Design Notes:**
@@ -751,33 +1175,17 @@ Coffee, Movie, Drinks, Dinner, Comedy show, Walk, Museum, Live music, Board game
 
 ---
 
-### 3.2 Discovery & Swiping
+### 4.2 Discovery & Swiping
 
-#### Session Setup (Discovery Header)
-
-**Layout:**
-```
-┌─────────────────────────────────┐
-│  🍺 Drinks    │  7-9 PM Today   │
-│  ──────────────────────────────  │
-│  ↓  Tap to change               │
-└─────────────────────────────────┘
-```
-
-**Design Notes:**
-- Persistent header on discovery screen
-- Shows current activity filter + availability
-- Tap either section to change
-- Neon accent on the activity icon
-- "Tap to change" is subtle hint for first-time users
-
----
-
-#### Profile Card
+#### Discovery Screen with Full Mobile Chrome
 
 **Layout:**
 ```
-┌─────────────────────────────────┐
+┌─────────────────────────────────┐ ← Status bar
+│ 9:41        ⚡ 5G       █▌▌▌ 87% │
+├─────────────────────────────────┤
+│  🍺 Drinks  │  7-9 PM Today   ⚙️│ ← Contextual header
+├─────────────────────────────────┤
 │                                 │
 │  ┌───────────────────────────┐  │
 │  │                           │  │
@@ -802,8 +1210,20 @@ Coffee, Movie, Drinks, Dinner, Comedy show, Walk, Museum, Live music, Board game
 │                                 │
 │    ✗                       ♡    │
 │                                 │
+├─────────────────────────────────┤
+│  🔍         💬  2      👤       │ ← Tab bar with badge
+│ Explore     Matches   Profile   │
 └─────────────────────────────────┘
+           ▔▔▔▔▔
 ```
+
+**Contextual Header Notes:**
+- 56px height, sticky at top
+- Left section: 🍺 Drinks (tappable - opens activity selector bottom sheet)
+- Right section: 7-9 PM Today (tappable - opens availability selector bottom sheet)
+- Settings icon far right (opens preferences)
+- Neon accent on active filter
+- Divider between sections
 
 **Design Notes:**
 - Photo takes 60% of card height
@@ -962,13 +1382,18 @@ When you match, both users automatically receive each other's intro (height, job
 
 ---
 
-### 3.3 Matches Screen
+### 4.3 Matches Screen
 
 **Layout:**
 ```
-┌─────────────────────────────────┐
-│            Matches              │
-│  ──────────────────────────────  │
+┌─────────────────────────────────┐ ← Status bar
+│ 9:41        ⚡ 5G       █▌▌▌ 87% │
+├─────────────────────────────────┤
+│ ←                              ︙│ ← Large title header
+│                                 │
+│ Matches                         │
+│                                 │
+├─────────────────────────────────┤ ← Collapses on scroll
 │                                 │
 │  Available Now                  │
 │                                 │
@@ -995,10 +1420,11 @@ When you match, both users automatically receive each other's intro (height, job
 │  │         "That pottery pla...││
 │  └─────────────────────────────┘│
 │                                 │
-│  ──────────────────────────────  │
-│                                 │
-│  [Tab Bar: Explore | Matches | Profile] │
+├─────────────────────────────────┤
+│  🔍         💬  2      👤       │ ← Tab bar
+│ Explore     Matches   Profile   │
 └─────────────────────────────────┘
+           ▔▔▔▔▔
 ```
 
 **Design Notes:**
@@ -1014,14 +1440,16 @@ When you match, both users automatically receive each other's intro (height, job
 
 ---
 
-### 3.4 Chat Screen
+### 4.4 Chat Screen
 
 **Layout:**
 ```
-┌─────────────────────────────────┐
-│  ←   Priya, 26                  │
+┌─────────────────────────────────┐ ← Status bar
+│ 9:41        ⚡ 5G       █▌▌▌ 87% │
+├─────────────────────────────────┤
+│  ←   Priya, 26                 ︙│ ← Header (tappable)
 │       🍺 Drinks • 7-9 PM Today  │
-│  ──────────────────────────────  │
+├─────────────────────────────────┤
 │                                 │
 │  ┌───────────────────────────┐  │
 │  │  ✓ Priya's intro:         │  │
@@ -1043,21 +1471,44 @@ When you match, both users automatically receive each other's intro (height, job
 │      │ Indiranagar!       │    │
 │      └─────────────────────┘    │
 │                                 │
-│  ──────────────────────────────  │
-│                                 │
-│  ┌───────────────────────────┐  │
+│  ┌───────────────────────────┐  │ ← Quick replies
 │  │ Are you up for meeting?  │  │
 │  └───────────────────────────┘  │
 │  ┌───────────────────────────┐  │
 │  │ Yes, that time works!    │  │
 │  └───────────────────────────┘  │
-│  ┌───────────────────────────┐  │
-│  │ Where should we meet?    │  │
-│  └───────────────────────────┘  │
 │                                 │
-│  ┌─────────────────────────────┐│
-│  │  Type a message...    📞 📹 ││
-│  └─────────────────────────────┘│
+├─────────────────────────────────┤
+│  Type a message...      📞  📹  │ ← Input bar (sticky)
+└─────────────────────────────────┘
+           ▔▔▔▔▔
+```
+
+**With Keyboard Open:**
+```
+┌─────────────────────────────────┐ ← Status bar
+│ 9:41        ⚡ 5G       █▌▌▌ 87% │
+├─────────────────────────────────┤
+│  ←   Priya, 26                 ︙│ ← Header
+│       🍺 Drinks • 7-9 PM Today  │
+├─────────────────────────────────┤
+│  [Scrollable message area]      │
+│                                 │
+│      ┌─────────────────────┐    │
+│      │ Right? There's a   │    │
+│      │ new place in       │    │
+│      │ Indiranagar!       │    │
+│      └─────────────────────┘    │
+│                                 │
+├─────────────────────────────────┤
+│  Should we meet there?   📞  📹 │ ← Input with text
+│                              ↑  │ ← Send button
+├─────────────────────────────────┤
+│     [System Keyboard]           │
+│                                 │
+│  Q W E R T Y U I O P            │
+│   A S D F G H J K L             │
+│    Z X C V B N M               │
 └─────────────────────────────────┘
 ```
 
@@ -1133,13 +1584,18 @@ On match, both users' intros (factual info) appear at the top of the chat automa
 
 ---
 
-### 3.5 Profile & Settings
+### 4.5 Profile & Settings
 
 **Layout:**
 ```
-┌─────────────────────────────────┐
-│           Your Profile          │
-│  ──────────────────────────────  │
+┌─────────────────────────────────┐ ← Status bar
+│ 9:41        ⚡ 5G       █▌▌▌ 87% │
+├─────────────────────────────────┤
+│                                ︙│ ← Large title header
+│                                 │
+│ Your Profile                    │
+│                                 │
+├─────────────────────────────────┤ ← Collapses on scroll
 │                                 │
 │  ┌───────────────────────────┐  │
 │  │                           │  │
@@ -1174,7 +1630,11 @@ On match, both users' intros (factual info) appear at the top of the chat automa
 │  Help & Support                 │
 │  Log Out                        │
 │                                 │
+├─────────────────────────────────┤
+│  🔍         💬         👤       │ ← Tab bar
+│ Explore     Matches   Profile   │
 └─────────────────────────────────┘
+           ▔▔▔▔▔
 ```
 
 ---
@@ -1444,45 +1904,254 @@ Set yours? →
 
 ---
 
-## Part 4: Interaction Patterns
+## Part 5: Mobile Interaction Patterns
 
-### 4.1 Swipe Gestures
+### 5.1 Gesture Dictionary
 
-| Gesture | Threshold | Effect |
-|---------|-----------|--------|
-| Swipe right | >100px horizontal | Like + send intro |
-| Swipe left | >100px horizontal | Unlike |
-| Tap | Anywhere on card | Expand profile |
-| Swipe down | >50px vertical | Dismiss expanded view |
+#### Discovery Card Gestures
 
-### 4.2 Haptic Feedback
+| Gesture | Threshold | Effect | Visual Feedback |
+|---------|-----------|--------|-----------------|
+| Swipe right | >100px horizontal | Like + send intro | Card tilts right, neon glow, flies off |
+| Swipe left | >100px horizontal | Unlike | Card tilts left, red tint, flies off |
+| Tap card | Single tap | Expand profile | Modal slides up |
+| Tap photo area | While expanded | Advance photo | Crossfade + dot indicator |
+| Swipe down | >80px vertical | Dismiss expanded view | Modal slides down |
 
-| Action | Haptic Type |
-|--------|-------------|
-| Like | Medium impact |
-| Unlike | Light impact |
-| Match | Heavy impact + double pulse |
-| Send message | Light impact |
-| Quick reply tap | Selection tick |
-| Age slider move | Light tick per year |
-| Activity toggle | Selection tick |
+#### Chat Gestures
 
-### 4.3 Transitions
+| Gesture | Effect |
+|---------|--------|
+| Long press message | Copy / Delete options |
+| Tap input field | Show keyboard + quick replies |
+| Tap outside keyboard | Dismiss keyboard |
+| Swipe down on messages | Pull to load earlier messages |
 
-| Transition | Animation | Duration |
-|------------|-----------|----------|
-| Screen to screen | Slide left/right | 300ms |
-| Modal open | Slide up + fade | 250ms |
-| Modal close | Slide down + fade | 200ms |
-| Card swipe | Physics-based throw | Velocity-dependent |
-| Toast appear | Slide down | 200ms |
-| Toast dismiss | Slide up | 150ms |
+#### General Navigation
+
+| Gesture | Effect |
+|---------|--------|
+| Swipe from left edge | Go back (iOS) |
+| Swipe down on modal | Dismiss modal |
+| Tap active tab | Scroll to top |
+| Pull down to refresh | Reload content (Discovery, Matches) |
+| Long press tab | Haptic + quick action menu |
 
 ---
 
-## Part 5: Trust & Safety Design
+### 5.2 Haptic Feedback Choreography
 
-### 5.1 Verification Indicators
+**Why Haptics Matter:**
+Haptics turn a visual app into a *felt* experience. Done right, they create emotional punctuation—moments of delight that compound trust.
+
+| Action | Haptic Type | Timing | Why |
+|--------|-------------|--------|-----|
+| Like swipe | Medium impact | At 100px threshold | Confirms action committed |
+| Unlike swipe | Light impact | At 100px threshold | Subtle acknowledgment |
+| Match | Heavy impact + 2 ticks | On popup appear | Celebration moment |
+| Send message | Light impact | On send | Satisfying completion |
+| Quick reply tap | Selection | On tap | Button press feel |
+| Tab switch | Selection | On tap | Navigation confirmation |
+| Pull-to-refresh ready | Selection | At 80px threshold | "Ready to release" signal |
+| Activity toggle | Selection | On tap | Toggle confirmation |
+| Age slider | Light tick | Per year increment | Physical dial feeling |
+| Photo advance | Light impact | On swipe | Page turn feel |
+| Error | Notification | On error toast | Alert attention |
+| Success | Success | On success toast | Positive reinforcement |
+| Long press begins | Medium impact | After 0.5s | Context menu ready |
+| Bottom sheet snap | Light impact | On snap point | Physical drawer feel |
+
+**Haptic Philosophy:**
+- Reward positive actions with satisfying feedback
+- Keep error haptics distinct but not jarring
+- Match haptic intensity to action importance
+- Never use haptics for passive events (scrolling, viewing)
+
+---
+
+### 5.3 Animation Timing & Easing
+
+**The Physics of Trust:**
+Animations shouldn't feel like animations—they should feel like physics. Real objects have weight and momentum.
+
+| Transition | Animation Curve | Duration | Why |
+|------------|----------------|----------|-----|
+| Screen push | Ease-in-out | 300ms | Natural page flip |
+| Modal appear | Spring (0.8, 0.6) | ~350ms | Bouncy entrance |
+| Modal dismiss | Ease-in | 200ms | Quick exit |
+| Card swipe | Velocity-based decay | Variable | Realistic throw |
+| Bottom sheet | Spring (0.9, 0.8) | ~300ms | Drawer feel |
+| Toast appear | Ease-out | 200ms | Gentle entry |
+| Toast dismiss | Ease-in | 150ms | Quick exit |
+| Tab switch | Ease-in-out | 250ms | Smooth transition |
+| Button press | Ease-out | 100ms | Snappy response |
+| Skeleton shimmer | Linear | 800ms loop | Smooth sweep |
+| Like/unlike overlay | Ease-out | 200ms | Quick flash |
+| Photo crossfade | Ease-in-out | 250ms | Smooth blend |
+| Header collapse | Ease-out | 300ms | Smooth scroll |
+| Keyboard appear | System default | ~250ms | Native feel |
+
+**Animation Principles:**
+1. **Entrances are bold, exits are quick** - Coming in should feel significant, leaving should be efficient
+2. **Spring for delight** - Use spring animations for moments of celebration (match, success)
+3. **Ease for efficiency** - Use ease curves for utilitarian actions (navigation, dismiss)
+4. **Respect velocity** - Swipe actions should maintain user's gesture velocity
+5. **Never block interaction** - Animations should never prevent the next action
+
+---
+
+### 5.4 Touch Target Sizing
+
+**Finger-Friendly Minimum Sizes:**
+
+| Element | Minimum Size | Recommended Size | Notes |
+|---------|--------------|------------------|-------|
+| Primary button | 44px height | 52px height | Full-width comfortable |
+| Tab bar icon | 44×44px tap area | 24×24px icon inside | Spacing creates target |
+| Back button | 44×44px | Entire left header zone | Easy thumb reach |
+| Card action buttons | 48×48px | Circular, good spacing | Bottom of cards |
+| List row | 56px height | 68px for important rows | Full-width tappable |
+| Settings row | 52px height | — | With >12px between rows |
+| Quick reply button | 44px height | Auto width with padding | Scrollable horizontal |
+| Close/dismiss button | 44×44px | Top-right modal corner | Easy one-hand reach |
+| Photo dots | 8px visible | 24×24px tap area | Invisible padding |
+| Activity pills | 36px height | — | Tap to filter |
+| Message bubble | 36px min height | Variable with content | Long-press enabled |
+
+**Thumb Zone Heatmap:**
+```
+┌─────────────────────────────────┐
+│ 🥶 Hard    🥶 Hard              │ ← Top corners: hardest to reach
+│                                 │
+│                                 │
+│         😊 Comfortable          │ ← Center: easy
+│                                 │
+│                                 │
+│ 🔥 Easy    🔥 Easy    🔥 Easy   │ ← Bottom: easiest (thumb natural position)
+└─────────────────────────────────┘
+```
+
+**Design Implications:**
+- Primary CTAs at bottom (Get Started, Continue, Send)
+- Navigation at bottom (Tab bar)
+- Back button large and left-aligned
+- Destructive actions at top (harder to reach = less accidental)
+- Quick replies near input (bottom zone)
+
+---
+
+### 5.5 Loading State Transitions
+
+**The Three-Act Structure:**
+
+**Act 1: Anticipation (0-300ms)**
+- Show skeleton immediately
+- No blank screens, ever
+- Skeleton matches exact layout
+
+**Act 2: Loading (300ms-2s)**
+- Shimmer animation active
+- User can still scroll skeleton content
+- Cancel actions remain available
+
+**Act 3: Resolution (<100ms)**
+- Crossfade from skeleton to real content
+- Maintain scroll position
+- No jarring jumps or shifts
+
+**Examples:**
+
+**Discovery Loading:**
+```
+Frame 1 (0ms):        Frame 2 (500ms):      Frame 3 (1200ms):
+┌──────────┐          ┌──────────┐          ┌──────────┐
+│ ▓▓▓▓▓▓▓▓ │   →      │ ░▓▓▓▓▓▓▓ │   →      │ [Photo]  │
+│ ▓▓▓▓▓▓▓▓ │          │ ▓░▓▓▓▓▓▓ │          │ Priya, 26│
+│ ▓▓ ▓▓    │          │ ▓▓░▓ ▓▓  │          │ 🍺 Drinks│
+└──────────┘          └──────────┘          └──────────┘
+  Skeleton              Shimmering            Real content
+```
+
+**Message Sending:**
+```
+Tap Send → Light haptic
+Message bubble appears with:
+  • Slightly reduced opacity (80%)
+  • Small spinner on right
+  • "Sending..." below (muted)
+
+On success (< 2s):
+  • Fade to full opacity
+  • Spinner → checkmark
+  • "Sent" replaces text (then fades)
+
+On failure:
+  • Red outline appears
+  • "⚠ Tap to retry" appears
+  • Error haptic fires
+```
+
+---
+
+### 5.6 Empty State Illustrations
+
+**Why Illustrations Matter:**
+Empty states are emotional moments—potential frustration points. Great illustrations turn "nothing here" into "something's coming."
+
+**Style Guide:**
+- Loose, hand-drawn aesthetic (matches brand)
+- Single color accent (neon) + dark background
+- Simple, not detailed—suggests possibility, not finality
+- Objects related to activities (coffee cups, pottery, tickets)
+- Never show sad faces or negative imagery
+
+**Common Empty States:**
+
+| Screen | Illustration | Copy | CTA |
+|--------|--------------|------|-----|
+| No matches | Two empty coffee cups side-by-side | "No matches yet" | "Start Exploring" |
+| No messages | Chat bubble with sparkles | "Start a conversation" | "Send a message" |
+| Out of profiles | Empty bar stools | "You've seen everyone" | "Try Coffee instead" or "Invite friends" |
+| No availability | Clock with moon | "No one's free right now" | "Show me" or "Notify me" |
+| Network error | Broken coffee cup | "Something went wrong" | "Try again" |
+| Loading failed | Unplugged power cord | "Couldn't load this" | "Retry" |
+
+---
+
+### 5.7 Notification Patterns
+
+**Push Notifications:**
+
+| Trigger | Timing | Message | Action |
+|---------|--------|---------|--------|
+| New match | Immediate | "🎉 You matched with Priya!" | Open chat |
+| New message | Immediate | "Priya: Hey! Love that you..." | Open chat |
+| Peak time | 6-7 PM | "🔥 Peak time in Indiranagar! 52 people available." | Open discovery |
+| Availability ending | 30 min before | "⏰ Your availability ends in 30 minutes" | Extend time |
+| Match expiring | 24h after match | "Your match with Priya expires soon. Say hi?" | Open chat |
+| Activity reminder | 1h before | "📍 Meeting Priya for drinks at 8 PM" | View details |
+
+**In-App Badges:**
+
+```
+Tab Bar Badge:
+│  💬  3  │  ← 3 unread messages
+│ Matches │
+
+Activity Badge:
+[Photo] 🟢  ← Available now indicator
+
+Quick Reply Badge:
+┌──────────────────┐
+│ New suggestion ✨ │  ← AI-generated quick reply
+└──────────────────┘
+```
+
+---
+
+## Part 6: Trust & Safety Design
+
+### 6.1 Verification Indicators
 
 **Quick Alignment Call Badge:**
 After completing a video call, show on profile:
@@ -1490,7 +2159,7 @@ After completing a video call, show on profile:
 ✓ Video verified
 ```
 
-### 5.2 Report Flow
+### 6.2 Report Flow
 
 Accessible from profile view or chat:
 ```
@@ -1515,7 +2184,7 @@ Accessible from profile view or chat:
 └─────────────────────────────────┘
 ```
 
-### 5.3 Safety During Activities
+### 6.3 Safety During Activities
 
 In chat, after plans are confirmed:
 ```
@@ -1534,7 +2203,7 @@ In chat, after plans are confirmed:
 
 ---
 
-## Part 6: Empty States
+## Part 7: Empty States
 
 ### No Matches Yet
 
@@ -1596,9 +2265,9 @@ In chat, after plans are confirmed:
 
 ---
 
-## Part 7: Accessibility Considerations
+## Part 8: Accessibility Considerations
 
-### 7.1 Color Contrast
+### 8.1 Color Contrast
 
 | Element | Contrast Ratio | Pass |
 |---------|---------------|------|
@@ -1606,13 +2275,13 @@ In chat, after plans are confirmed:
 | Muted text on dark | 5.2:1 | AA |
 | Neon on dark | 7.8:1 | AAA |
 
-### 7.2 Touch Targets
+### 8.2 Touch Targets
 
 - All interactive elements: minimum 44px × 44px
 - Buttons: 48-52px height
 - Cards: Full width, minimum 80px height
 
-### 7.3 Motion Sensitivity
+### 8.3 Motion Sensitivity
 
 - Respect "Reduce Motion" system setting
 - When enabled:
@@ -1621,7 +2290,7 @@ In chat, after plans are confirmed:
   - Remove confetti effects
   - Use static indicators instead of pulsing
 
-### 7.4 Screen Reader Labels
+### 8.4 Screen Reader Labels
 
 Every interactive element must have:
 - Descriptive label (e.g., "Like profile" not just "Heart icon")
@@ -1630,7 +2299,7 @@ Every interactive element must have:
 
 ---
 
-## Part 8: Performance Targets
+## Part 9: Performance Targets
 
 | Metric | Target |
 |--------|--------|
@@ -1640,6 +2309,298 @@ Every interactive element must have:
 | Image lazy load threshold | 2 cards ahead |
 | Animation frame rate | 60fps |
 | Touch response latency | <100ms |
+
+---
+
+## Part 10: Mobile Color System & Visual Design
+
+### 10.1 Color Palette for Mobile
+
+**Dark Mode Primary (Default):**
+```
+Background:       #0A0A0A (Pure black for OLED)
+Surface:          #1A1A1A (Cards, modals)
+Surface Elevated: #242424 (Active states, headers)
+Border:           #2A2A2A (Dividers, card edges)
+```
+
+**Neon Accent System:**
+```
+Primary Neon:     #00FF9D (Main actions, selections)
+Neon Glow:        rgba(0, 255, 157, 0.2) (Backgrounds, highlights)
+Neon Border:      rgba(0, 255, 157, 0.4) (Active borders)
+```
+
+**Text Hierarchy:**
+```
+Primary Text:     #FFFFFF (Headlines, body)
+Secondary Text:   #A0A0A0 (Subtitles, metadata)
+Tertiary Text:    #6A6A6A (Hints, placeholders)
+Disabled Text:    #404040 (Inactive elements)
+```
+
+**Semantic Colors:**
+```
+Success:          #00FF9D (Match, sent message)
+Warning:          #FFB800 (Expiring soon, low activity)
+Error:            #FF3B3B (Failed action, report)
+Info:             #0099FF (Tips, notifications)
+```
+
+**Availability Indicators:**
+```
+Available Now:    #00FF9D (Green dot)
+Later Today:      #FFB800 (Yellow dot)
+This Week:        #0099FF (Blue dot)
+Offline:          #404040 (Gray dot)
+```
+
+---
+
+### 10.2 Typography for Mobile Screens
+
+**Font Stack:**
+```
+Primary: -apple-system, SF Pro Display, Roboto, sans-serif
+Fallback: System default
+```
+
+**Scale:**
+```
+Display:    32px, bold (Profile names, large titles)
+Title 1:    28px, bold (Section headers)
+Title 2:    24px, semibold (Card names)
+Title 3:    20px, semibold (Modal headers)
+Headline:   18px, semibold (Standard headers)
+Body:       16px, regular (Main content, messages)
+Subhead:    14px, medium (Metadata, labels)
+Caption:    12px, regular (Timestamps, hints)
+Micro:      11px, medium (Tab labels, badges)
+```
+
+**Line Heights:**
+```
+Display:    1.2 (Tight, for impact)
+Headlines:  1.3 (Balanced)
+Body:       1.5 (Comfortable reading)
+Captions:   1.4 (Slightly tighter)
+```
+
+**Letter Spacing:**
+```
+Display:    -1.5% (Optical balance)
+Headlines:  -1% (Slightly tight)
+Body:       0% (Standard)
+Captions:   0.5% (Slightly loose)
+Tab labels: 2% (All caps, needs space)
+```
+
+---
+
+### 10.3 Elevation & Shadows (Mobile)
+
+**Why Elevation Matters on Mobile:**
+Depth cues help users understand interactive hierarchy without relying solely on color.
+
+**Elevation Levels:**
+
+```
+Level 0 (Base):
+  box-shadow: none
+  Use for: Background, flush content
+
+Level 1 (Raised):
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5)
+  Use for: Cards, input fields
+
+Level 2 (Floating):
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6)
+  Use for: Bottom sheets, action menus
+
+Level 3 (Modal):
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7)
+  Use for: Modals, expanded profiles
+
+Level 4 (Overlay):
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.8)
+  Use for: Match popup, full-screen overlays
+```
+
+**Neon Glow (Special):**
+```
+box-shadow: 0 0 20px rgba(0, 255, 157, 0.3)
+Use for: Like button, active states, success moments
+```
+
+---
+
+### 10.4 Spacing System (8px Grid)
+
+**Base Unit: 8px**
+
+All spacing must be multiples of 8px for pixel-perfect alignment across devices.
+
+```
+4px   (0.5x):  Tight spacing (icon to text)
+8px   (1x):    Compact padding (button text)
+12px  (1.5x):  Small gaps (pill spacing)
+16px  (2x):    Standard padding (card content)
+24px  (3x):    Section spacing (between groups)
+32px  (4x):    Large spacing (between major sections)
+40px  (5x):    Extra large (onboarding spacing)
+48px  (6x):    Major spacing (screen top/bottom)
+```
+
+**Component-Specific:**
+```
+Card padding:           16px all sides
+List item padding:      16px horizontal, 12px vertical
+Button padding:         16px horizontal, 14px vertical
+Modal padding:          24px all sides
+Screen edge margin:     16px (mobile), 20px (tablet)
+Between cards:          12px vertical
+Section dividers:       24px vertical
+```
+
+---
+
+### 10.5 Border Radius (Rounded Corners)
+
+**Why Rounded Corners Matter:**
+Softness = approachability. Sharp corners feel corporate. Rounded feels human.
+
+```
+Small:      4px   (Pills, badges, tags)
+Medium:     8px   (Buttons, inputs)
+Standard:   12px  (Cards, toasts)
+Large:      18px  (Profile cards, photos)
+Extra:      24px  (Bottom sheets, modals)
+Circular:   50%   (Avatar, action buttons, dots)
+```
+
+**Special Cases:**
+```
+Tab bar:             0px top corners (flush to screen edge)
+Bottom sheet:        24px top corners only
+Photo thumbnails:    12px
+Match popup:         24px all corners
+Chat bubbles:        18px (with 4px on sender corner)
+```
+
+---
+
+### 10.6 Iconography Guidelines
+
+**Icon Style:**
+- Outlined (not filled) for inactive states
+- Filled for active/selected states
+- 24×24px standard size
+- 2px stroke weight
+- Rounded line caps
+- Neon color for active, muted gray for inactive
+
+**Icon Library:**
+```
+Navigation:
+  🔍  Search/Explore (outlined magnifying glass)
+  💬  Matches (outlined chat bubble)
+  👤  Profile (outlined person)
+
+Actions:
+  ←   Back (arrow)
+  ✕   Close (X)
+  ✓   Confirm (checkmark)
+  ♡   Like (outlined heart)
+  ⚙️   Settings (gear)
+  ︙   More options (vertical dots)
+
+Communication:
+  📞  Voice call
+  📹  Video call
+  ↑   Send message
+
+States:
+  🟢  Available (filled circle)
+  ⚠   Warning (triangle)
+  ⊙   Loading (circle spinner)
+  ↻   Refresh (circular arrow)
+```
+
+---
+
+### 10.7 Image Treatment
+
+**Profile Photos:**
+- Aspect ratio: 4:5 (portrait)
+- Minimum resolution: 800×1000px
+- Compression: High quality JPEG or WebP
+- Loading: Progressive (blur-up technique)
+- Fallback: Neon gradient with initials
+
+**Photo Grid:**
+```
+┌─────────┬─────────┐
+│         │         │
+│  Main   │  Photo  │
+│  Photo  │    2    │
+│         │         │
+├─────────┼─────────┤
+│         │         │
+│ Photo 3 │ Photo 4 │
+│         │         │
+└─────────┴─────────┘
+```
+
+**Image States:**
+```
+Loading:    Blur-up from 20px thumbnail
+Loaded:     Sharp, full quality
+Error:      Neon outline + placeholder icon
+Tap:        Subtle scale (0.98) for feedback
+```
+
+---
+
+### 10.8 Motion Design Language
+
+**The Three Speeds:**
+
+**Fast (100-150ms):** Immediate response
+- Button press
+- Toggle switch
+- Checkbox
+- Icon state change
+
+**Medium (200-300ms):** Standard transition
+- Screen navigation
+- Modal appear/dismiss
+- Toast notification
+- Tab switch
+
+**Slow (350-500ms):** Dramatic moment
+- Match popup
+- Bottom sheet expansion
+- Profile card expand
+- Celebration animation
+
+**Animation Curves Explained:**
+```
+Ease-out (Fast start, slow end):
+  Use for: Elements entering screen
+  Feel: "Arriving with purpose, settling gently"
+
+Ease-in (Slow start, fast end):
+  Use for: Elements leaving screen
+  Feel: "Departing quickly, efficiently"
+
+Ease-in-out (Slow both ends):
+  Use for: Elements moving on screen
+  Feel: "Smooth, natural motion"
+
+Spring (Bouncy):
+  Use for: Delightful moments
+  Feel: "Playful, energetic, human"
+```
 
 ---
 
@@ -1698,4 +2659,41 @@ Match:      [Both want ☕] - Text, neon background at 20%
 
 ---
 
-*This design system is a living document. Every decision should be questioned against the 11-star experience: Does this help someone meet someone new through a shared activity? If not, reconsider.*
+## Final Word: Building for the 11-Star Mobile Experience
+
+This isn't just a design system—it's a commitment to craft.
+
+Every screen, every animation, every haptic tick is an opportunity to either build or erode trust. Users won't remember your clever copy or your beautiful gradients. They'll remember how the app *felt*.
+
+**The mobile medium demands obsession:**
+- A button that's 42px instead of 44px isn't "close enough"—it's a broken promise to thumbs
+- A skeleton loader isn't optional polish—it's the difference between anxiety and confidence
+- A haptic tick isn't a nice-to-have—it's the punctuation that turns interaction into conversation
+
+**Remember the human truth:**
+People aren't swiping on profiles. They're swiping on possibilities. They're not chatting with matches. They're working up the courage to meet someone real.
+
+**Every pixel matters because every pixel either:**
+1. Helps someone show up to a pottery class tonight and meet someone great
+2. Adds friction that keeps them home, alone, scrolling
+
+**The standard isn't "good enough"—it's:**
+- Does this feel like an iOS/Android app that Apple/Google would be proud to feature?
+- Would I trust this enough to meet a stranger?
+- Does this respect my time, my attention, my hope?
+
+**This design system is a living document.**
+
+Every decision should be questioned against the 11-star experience: *Does this help someone meet someone new through a shared activity?* If not, reconsider.
+
+Every component should be tested against real thumbs on real devices in real lighting conditions with real network speeds.
+
+Every interaction should feel so natural that users don't think about the app—they think about the person they're about to meet.
+
+**Build for 10-star. Dream of 11-star.**
+
+The details aren't the details. The details *are* the design.
+
+Now go build something people love.
+
+— *In the spirit of obsessive craft*
