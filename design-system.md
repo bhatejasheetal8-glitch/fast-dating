@@ -604,6 +604,8 @@ Coffee, Movie, Drinks, Dinner, Comedy show, Walk, Museum, Live music, Board game
 │  │                           │  │
 │  └───────────────────────────┘  │
 │                                 │
+│         Skip this step          │
+│                                 │
 └─────────────────────────────────┘
 ```
 
@@ -613,6 +615,9 @@ Coffee, Movie, Drinks, Dinner, Comedy show, Walk, Museum, Live music, Board game
 - Single select (tap auto-advances)
 - Selected card gets neon treatment
 - Copy is warm: "No wrong answer here"
+- **"Skip this step"** is muted text link at bottom
+- Tapping skip advances to next screen without setting preference
+- Skipped preference won't be displayed on user's profile
 
 ---
 
