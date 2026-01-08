@@ -335,17 +335,71 @@ On first tap of any cell, show brief tooltip:
 
 ---
 
-#### Screen 7: Bio Builder
+#### Screen 7: Intro Information
 
-**Layout (Question View):**
+**Layout:**
 ```
 ┌─────────────────────────────────┐
 │  ←                    4 of 7    │
 │                                 │
-│     Let's build your intro      │
+│     Tell us about yourself      │
+│                                 │
+│     This gets shared when       │
+│     you match.                  │
+│                                 │
+│  Height                         │
+│  ┌───────────────────────────┐  │
+│  │ 5'7"                      │  │
+│  └───────────────────────────┘  │
+│                                 │
+│  Job / Study                    │
+│  ┌───────────────────────────┐  │
+│  │ Product Designer          │  │
+│  └───────────────────────────┘  │
+│                                 │
+│  Personality Type (optional)    │
+│  ┌───────────────────────────┐  │
+│  │ INFJ / Ambivert           │  │
+│  └───────────────────────────┘  │
+│                                 │
+│  Smoking                        │
+│  ○ Non-smoker  ○ Socially  ○ Yes│
+│                                 │
+│  Pets                           │
+│  ○ No pets  ○ Have pets  ○ Love │
+│                                 │
+│  ┌───────────────────────────┐  │
+│  │      Continue             │  │
+│  └───────────────────────────┘  │
+└─────────────────────────────────┘
+```
+
+**Design Notes:**
+- Single scrollable screen with all intro fields
+- Height: Dropdown picker (feet/inches or cm)
+- Job/Study: Free text input, 50 char limit
+- Personality: Optional, free text, 30 char limit
+- Smoking: Radio buttons, single select
+- Pets: Radio buttons, single select
+- All fields except personality are required
+- Button disabled until required fields filled
+
+**Why This Matters:**
+This factual information auto-sends when you match. It answers the basic questions ("Who is this person?") so the bio can focus on personality and vibe.
+
+---
+
+#### Screen 8: Bio Builder
+
+**Layout (Question View):**
+```
+┌─────────────────────────────────┐
+│  ←                    5 of 7    │
+│                                 │
+│     Now let's build your bio    │
 │                                 │
 │     Answer a few quick ones.    │
-│     We'll write the rest.       │
+│     We'll write the vibe.       │
 │                                 │
 │     ━━━━━━━━━━○───────────      │
 │     Question 3 of 12            │
@@ -399,16 +453,20 @@ Cards slide left, new question slides in from right. Quick, not dramatic.
 **Why 12, not 22:**
 Chesky principle: "If you can't onboard in 90 seconds, you've lost." 12 questions × 3 seconds = 36 seconds for bio section. Acceptable.
 
+**The Distinction:**
+- **Intro (Screen 7):** Facts. What someone needs to know. Auto-sends on match.
+- **Bio (Screen 8):** Vibe. How you show up. Replaces the pick-up line.
+
 ---
 
-#### Screen 8: Bio Preview
+#### Screen 9: Bio Preview
 
 **Layout:**
 ```
 ┌─────────────────────────────────┐
-│  ←                    4 of 7    │
+│  ←                    5 of 7    │
 │                                 │
-│     Here's your intro           │
+│     Here's your bio             │
 │                                 │
 │  ┌───────────────────────────┐  │
 │  │                           │  │
@@ -446,15 +504,16 @@ Chesky principle: "If you can't onboard in 90 seconds, you've lost." 12 question
 - Never use bullet points—sounds like a resume
 - Always end with an activity-forward line
 - Avoid "I am" statements; use active voice
+- Focus on personality, preferences, and energy—not facts
 
 ---
 
-#### Screen 9: Activity Selection
+#### Screen 10: Activity Selection
 
 **Layout:**
 ```
 ┌─────────────────────────────────┐
-│  ←                    5 of 7    │
+│  ←                    6 of 8    │
 │                                 │
 │     What do you want to do?     │
 │                                 │
@@ -501,12 +560,12 @@ Coffee, Movie, Drinks, Dinner, Comedy show, Walk, Museum, Live music, Board game
 
 ---
 
-#### Screen 10: Bill Preference
+#### Screen 11: Bill Preference
 
 **Layout:**
 ```
 ┌─────────────────────────────────┐
-│  ←                    6 of 7    │
+│  ←                    7 of 8    │
 │                                 │
 │     How do you like to          │
 │     handle the bill?            │
@@ -548,12 +607,12 @@ Coffee, Movie, Drinks, Dinner, Comedy show, Walk, Museum, Live music, Board game
 
 ---
 
-#### Screen 11: Quick Alignment Preference
+#### Screen 12: Quick Alignment Preference
 
 **Layout:**
 ```
 ┌─────────────────────────────────┐
-│  ←                    7 of 7    │
+│  ←                    8 of 8    │
 │                                 │
 │     Want to vibe-check          │
 │     before meeting?             │
@@ -594,7 +653,7 @@ Coffee, Movie, Drinks, Dinner, Comedy show, Walk, Museum, Live music, Board game
 
 ---
 
-#### Screen 12: Area Selection
+#### Screen 13: Area Selection
 
 **Layout:**
 ```
@@ -639,7 +698,7 @@ Coffee, Movie, Drinks, Dinner, Comedy show, Walk, Museum, Live music, Board game
 
 ---
 
-#### Screen 13: Onboarding Complete
+#### Screen 14: Onboarding Complete
 
 **Layout:**
 ```
@@ -771,6 +830,12 @@ Coffee, Movie, Drinks, Dinner, Comedy show, Walk, Museum, Live music, Board game
 │                                 │
 │  ──────────────────────────────  │
 │                                 │
+│  5'6" • Product Designer        │
+│  Ambivert • Non-smoker          │
+│  Has pets 🐕                    │
+│                                 │
+│  ──────────────────────────────  │
+│                                 │
 │  "Coffee over chai, always.     │
 │   Weekends are for cafe hopping │
 │   and discovering new playlists.│
@@ -802,11 +867,17 @@ Coffee, Movie, Drinks, Dinner, Comedy show, Walk, Museum, Live music, Board game
 - Full-screen modal over discovery
 - Scrollable content
 - Photo gallery at top (swipeable)
-- Bio in quotation marks for personality
+- **Intro section** (factual): Height, job, personality type, smoking, pets - formatted as clean bullets
+- Divider line separates intro from bio
+- **Bio section** (vibe): In quotation marks for personality and energy
 - Activities as pills
 - Multiple availability slots shown
 - Preferences displayed clearly
 - Two-button layout at bottom (sticky)
+
+**The Two-Part Profile:**
+- **Intro:** Gets auto-sent on match. Answers "Who are you?" (facts)
+- **Bio:** Shows on profile. Answers "What's your vibe?" (personality)
 
 ---
 
@@ -827,6 +898,7 @@ Coffee, Movie, Drinks, Dinner, Comedy show, Walk, Museum, Live music, Board game
 │     You both want Drinks.       │
 │     They're free 7-9 PM.        │
 │                                 │
+│     ✓ Intros exchanged          │
 │                                 │
 │  ┌───────────────────────────┐  │
 │  │      Message Priya        │  │
@@ -843,9 +915,13 @@ Coffee, Movie, Drinks, Dinner, Comedy show, Walk, Museum, Live music, Board game
 - Photos overlap with subtle neon glow
 - "It's a match!" in large font
 - Shared activity + availability called out
+- **"✓ Intros exchanged"** confirms both users received each other's factual info automatically
 - Primary CTA: Message them
 - Secondary: Keep swiping (text link)
 - Consider subtle confetti animation
+
+**What Happens on Match:**
+When you match, both users automatically receive each other's intro (height, job, personality type, smoking status, pets). No action required. The chat opens with this context already shared.
 
 ---
 
@@ -934,10 +1010,10 @@ Coffee, Movie, Drinks, Dinner, Comedy show, Walk, Museum, Live music, Board game
 │  ──────────────────────────────  │
 │                                 │
 │  ┌───────────────────────────┐  │
-│  │  Priya's intro:           │  │
-│  │  "Coffee over chai.       │  │
-│  │   Weekends are for cafe   │  │
-│  │   hopping..."             │  │
+│  │  ✓ Priya's intro:         │  │
+│  │  5'6" • Product Designer  │  │
+│  │  Ambivert • Non-smoker    │  │
+│  │  Has pets 🐕              │  │
 │  └───────────────────────────┘  │
 │                                 │
 │          Their message          │
@@ -973,8 +1049,9 @@ Coffee, Movie, Drinks, Dinner, Comedy show, Walk, Museum, Live music, Board game
 
 **Design Notes:**
 - Header: Back arrow, name/age, shared activity + availability badge
-- Tap header to see full profile
-- Their intro appears first as context card (gray background)
+- Tap header to see full profile (where you can read their bio)
+- **Their intro appears first** as auto-sent context card (gray background, checkmark icon)
+- Intro shows factual information: height, job, personality type, smoking status, pets
 - Message bubbles: theirs left (gray), yours right (neon at 20%)
 - Quick replies appear above input field
 - Quick replies scroll horizontally if > 3
@@ -984,9 +1061,12 @@ Coffee, Movie, Drinks, Dinner, Comedy show, Walk, Museum, Live music, Board game
 
 **Quick Reply Behavior:**
 - Appear contextually based on conversation stage
-- Stage 1 (no messages): "Are you up for meeting?" / "Your intro says..."
+- Stage 1 (no messages): "Are you up for meeting?" / "Tell me more about..."
 - Stage 2 (after reply): "Yes, that time works!" / "Can we do later?"
 - Stage 3 (planning): "Where should we meet?" / "How about..."
+
+**The Auto-Send Mechanism:**
+On match, both users' intros (factual info) appear at the top of the chat automatically. This replaces the awkward "opening line" dance. Users can start conversations knowing basic details, and can tap the header to see the full profile (including bio) anytime.
 
 ---
 
